@@ -1,0 +1,915 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#141B2E">
+<meta name="description" content="Conocer la cultura japonesa a través de sus kanji. Creado por melitalove.">
+<title>Yū · melitalove</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Yū">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+:root{
+  --kon:#141B2E; --sumi:#1A1A1F; --shu:#B83A22; --kin:#C9A85A; --kinari:#F2ECDD;
+  --quiet:#C3C8D6; --line:#3A4766; --brown:#6B5420;
+  --mincho:'Shippori Mincho', serif; --gothic:'Zen Kaku Gothic New', sans-serif;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:#0C111E}
+body{font-family:var(--gothic);color:var(--kinari)}
+button{font:inherit;cursor:pointer}
+a{color:#E4CB8A}
+.app{position:relative;overflow:hidden;width:100%;max-width:430px;margin:0 auto;min-height:100vh;background:var(--kon)}
+.art{position:absolute;left:0;top:0;width:100%;height:540px;pointer-events:none}
+.app:not(.on-hoy) .art{display:none}
+main{position:relative;padding-bottom:100px}
+.screen{display:none}
+.screen.on{display:block}
+
+header.top{display:flex;justify-content:space-between;align-items:flex-start;padding:20px 20px 8px;gap:12px}
+header.top>span{white-space:nowrap}
+.moon-s{flex:none}
+.eyebrow{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--kin)}
+.sub{font-size:15px;font-weight:500}
+.muted{color:var(--quiet)}
+h1.title{margin:4px 0 0;font-family:var(--mincho);font-size:28px;font-weight:700;line-height:1.25}
+.back{min-height:44px;display:inline-flex;align-items:center;gap:6px;background:none;border:none;color:var(--kin);font-size:14px;padding:12px 20px 0}
+.lead{margin:0 20px 12px;font-size:15px;line-height:1.55;color:var(--quiet)}
+
+/* Hoy */
+.season{margin:8px 20px 0;min-height:44px;width:calc(100% - 40px);display:flex;align-items:center;gap:10px;background:rgba(20,27,46,.75);border:1px solid var(--line);border-radius:22px;padding:6px 14px;color:var(--kinari);text-align:left;position:relative}
+.season b{font-family:var(--mincho);color:var(--kin);font-size:17px}
+.hero{display:flex;flex-direction:column;align-items:center;padding:12px 20px 8px;gap:12px;position:relative}
+.enso{position:relative;width:260px;height:260px;display:flex;align-items:center;justify-content:center}
+.enso svg{position:absolute;inset:0}
+.enso .k{position:relative;font-family:var(--mincho);font-weight:700;font-size:150px;line-height:1;color:#fff}
+.reading{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;justify-content:center;text-align:center}
+.reading .r{font-family:var(--mincho);font-size:34px;font-weight:700;color:var(--kin)}
+.meaning{margin:0;font-family:var(--mincho);font-size:22px;font-weight:500;text-align:center}
+.pills{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.pill{min-height:44px;padding:0 16px;border-radius:22px;border:1px solid var(--kin);background:var(--kon);color:var(--kinari);font-size:14px;display:flex;align-items:center;gap:8px}
+.pill.on{background:var(--kin);color:var(--sumi)}
+.sec{padding:28px 20px 0;position:relative}
+.sec h2{margin:0 0 12px;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--kin);font-weight:500}
+.parts{display:flex;align-items:center;gap:10px}
+.part{flex:1;background:var(--kinari);color:var(--sumi);border-radius:4px;padding:14px 6px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
+.part .pk{font-family:var(--mincho);font-size:40px;line-height:1}
+.part span:last-child{font-size:14px}
+.part.result{background:var(--kon);border:1.5px solid var(--kin);color:var(--kinari)}
+.part.result .pk{color:var(--kin)}
+.op{font-size:22px;color:var(--kin)}
+.block{border-top:1px solid var(--line);padding-top:16px;margin-top:14px}
+.block:first-child{margin-top:0}
+.tag{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+.block p{margin:8px 0 0;font-size:15px;line-height:1.65}
+.paper{position:relative;overflow:hidden;margin:28px 20px 0;padding:22px 20px 20px;border-radius:4px;background:var(--kinari);color:var(--sumi);display:flex;flex-direction:column;gap:12px}
+.paper .crack{position:absolute;right:0;bottom:0;pointer-events:none;transform:scaleY(-1)}
+.paper label,.paper .q{position:relative;font-family:var(--mincho);font-size:22px;font-weight:700;line-height:1.35}
+textarea,input[type=search]{position:relative;width:100%;padding:12px;border:1px solid #A39C88;border-radius:4px;background:#FBF8F1;color:var(--sumi);font:inherit;font-size:16px}
+textarea{resize:vertical}
+.cta{position:relative;min-height:48px;border:none;border-radius:24px;background:var(--shu);color:#fff;font-size:16px;font-weight:700;padding:0 20px}
+.ghost-btn{min-height:44px;border:1px solid var(--kin);border-radius:22px;background:transparent;color:var(--kinari);font-size:14px;padding:0 16px}
+.status{margin:0;min-height:20px;font-size:14px;color:var(--brown)}
+.linkrow{min-height:44px;display:flex;align-items:center;justify-content:space-between;width:100%;background:none;border:none;color:#E4CB8A;font-size:15px;padding:0;text-align:left}
+
+/* Explorar */
+.hub{display:flex;flex-direction:column;gap:12px;padding:8px 20px 0}
+.hubcard{display:grid;grid-template-columns:64px minmax(0,1fr) 20px;align-items:center;gap:14px;background:var(--kinari);color:var(--sumi);border:none;border-radius:4px;padding:16px;text-align:left;position:relative;overflow:hidden}
+.hubcard .hk{font-family:var(--mincho);font-size:48px;font-weight:700;line-height:1;text-align:center}
+.hubcard .hn{font-family:var(--mincho);font-size:19px;font-weight:700}
+.hubcard .hd{font-size:14px;line-height:1.45;margin-top:2px;color:#3B3B42}
+
+/* Colección */
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:8px 20px 0}
+.card{position:relative;overflow:hidden;border:none;border-radius:4px;background:var(--kinari);color:var(--sumi);padding:18px 12px 14px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;min-height:150px}
+.card .ck{font-family:var(--mincho);font-size:56px;line-height:1.05;font-weight:700}
+.card .cr{font-family:var(--mincho);font-size:16px;color:#7A5C1C;font-weight:700}
+.card .cm{font-size:13px}
+.card.today{background:var(--kon);border:1.5px solid var(--kin);color:var(--kinari)}
+.card.today .ck,.card.today .cr{color:var(--kin)}
+.badge{position:absolute;top:8px;left:8px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:var(--shu);color:#fff;padding:3px 8px;border-radius:10px}
+.note{grid-column:1 / -1;border:1px dashed var(--kin);border-radius:4px;padding:16px;text-align:center;font-size:14px;line-height:1.5;color:var(--quiet)}
+
+/* Estaciones */
+.sekki-now{margin:8px 20px 0;padding:24px 20px;border-radius:4px;border:1.5px solid var(--kin);text-align:center;position:relative}
+.sekki-now .sk{font-family:var(--mincho);font-size:64px;font-weight:700;color:var(--kin);line-height:1.1;letter-spacing:4px}
+.sekki-now .sr{font-family:var(--mincho);font-size:20px;margin-top:6px}
+.sekki-now p{margin:10px 0 0;font-size:15px;line-height:1.6}
+.slist{padding:0 20px}
+.sgroup{margin-top:24px}
+.srow{display:grid;grid-template-columns:76px minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.srow .sk{font-family:var(--mincho);font-size:24px;font-weight:700}
+.srow .sm{font-size:14px;line-height:1.4}
+.srow .sd{font-size:13px;color:var(--quiet);white-space:nowrap}
+.srow.now .sk{color:var(--kin)}
+.srow .now-tag{color:var(--kin);font-weight:700}
+
+/* Cielo */
+.days{display:flex;flex-direction:column;gap:10px;padding:8px 20px 0}
+.day{display:grid;grid-template-columns:62px minmax(0,1fr) auto;gap:14px;align-items:center;background:transparent;border:1px solid var(--line);border-radius:4px;padding:12px 14px;color:var(--kinari);text-align:left}
+.day .dk{font-family:var(--mincho);font-size:44px;font-weight:700;line-height:1;text-align:center}
+.day .dn{font-family:var(--mincho);font-size:18px;font-weight:700}
+.day .dd{font-size:13px;color:var(--quiet);line-height:1.45}
+.day .dp{font-family:var(--mincho);font-size:15px;color:var(--kin);text-align:right;white-space:nowrap}
+.day.today{border-color:var(--kin);background:rgba(201,168,90,.10)}
+.day.today .dk{color:var(--kin)}
+
+/* Construir */
+.slots{display:flex;align-items:center;justify-content:center;gap:12px;padding:8px 20px 0}
+.slot{width:84px;height:84px;border-radius:4px;border:1.5px dashed var(--kin);display:flex;align-items:center;justify-content:center;font-family:var(--mincho);font-size:46px;color:var(--kinari)}
+.slot.filled{border-style:solid;background:var(--kinari);color:var(--sumi)}
+.slot.res{border-color:var(--shu)}
+.slot.res.ok{background:var(--kon);border:1.5px solid var(--kin);color:var(--kin)}
+.buildmsg{margin:14px 20px 0;min-height:48px;text-align:center;font-size:15px;line-height:1.55}
+.pieces{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;padding:8px 20px 0}
+.piece{aspect-ratio:1;min-height:48px;border:none;border-radius:4px;background:var(--kinari);color:var(--sumi);font-family:var(--mincho);font-size:26px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.piece.sel{outline:3px solid var(--kin);outline-offset:1px}
+.found{display:flex;flex-wrap:wrap;gap:8px}
+.found span{font-family:var(--mincho);font-size:22px;width:44px;height:44px;border:1px solid var(--line);border-radius:4px;display:flex;align-items:center;justify-content:center;color:var(--line)}
+.found span.got{border-color:var(--kin);color:var(--kin)}
+
+/* Mi kanji */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{min-height:40px;padding:0 14px;border-radius:20px;border:1px solid var(--line);background:transparent;color:var(--kinari);font-size:14px}
+.result{margin:20px 20px 0}
+.result .paper{margin:0;align-items:center;text-align:center}
+.result .rk{font-family:var(--mincho);font-size:96px;font-weight:700;line-height:1.1;position:relative}
+.result .rr{font-family:var(--mincho);font-size:20px;color:#7A5C1C;font-weight:700;position:relative}
+.result .rn{font-size:15px;line-height:1.6;position:relative}
+.result .warn{font-size:13px;color:var(--brown);line-height:1.5;position:relative}
+
+/* Shodō */
+.kpick{display:flex;gap:8px;overflow-x:auto;padding:8px 20px 4px;scrollbar-width:none}
+.kpick::-webkit-scrollbar{display:none}
+.kp{flex:none;width:48px;height:48px;border-radius:4px;border:1px solid var(--line);background:transparent;color:var(--kinari);font-family:var(--mincho);font-size:24px;font-weight:700}
+.kp.sel{border-color:var(--kin);color:var(--kin);background:rgba(201,168,90,.12)}
+.board-wrap{padding:12px 20px 0;display:flex;justify-content:center}
+.board{position:relative;width:min(100%,350px);aspect-ratio:1;background:var(--kinari);border-radius:4px;overflow:hidden;touch-action:none}
+.board svg,.board canvas{position:absolute;inset:0;width:100%;height:100%}
+.board canvas{cursor:crosshair}
+.shodo-info{display:flex;justify-content:space-between;align-items:baseline;padding:12px 20px 0;gap:12px}
+.shodo-info .sr{font-family:var(--mincho);font-size:20px;color:var(--kin);font-weight:700}
+.tools{display:flex;gap:8px;flex-wrap:wrap;padding:12px 20px 0}
+
+/* Diario */
+.entries{display:flex;flex-direction:column;gap:12px;padding:8px 20px 0}
+.entry{position:relative;overflow:hidden;background:var(--kinari);color:var(--sumi);border-radius:4px;padding:16px;display:grid;grid-template-columns:56px minmax(0,1fr);gap:12px}
+.entry .ek{font-family:var(--mincho);font-size:44px;line-height:1;font-weight:700}
+.entry .ed{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--brown);font-weight:700}
+.entry .eq{font-family:var(--mincho);font-size:15px;font-weight:700;margin:4px 0}
+.entry .et{font-size:15px;line-height:1.55;white-space:pre-wrap;margin:0}
+.empty{margin:16px 20px 0;padding:24px 20px;border:1px dashed var(--kin);border-radius:4px;text-align:center;line-height:1.6}
+
+/* Perfil */
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:8px 20px 0}
+.stat{border:1px solid var(--line);border-radius:4px;padding:14px 8px;text-align:center}
+.stat b{display:block;font-family:var(--mincho);font-size:28px;color:var(--kin)}
+.stat span{font-size:12px;color:var(--quiet)}
+.plans{display:flex;flex-direction:column;gap:10px;border:none;margin:0;padding:0}
+.plan{border:1px solid var(--line);border-radius:4px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.plan .pn{font-family:var(--mincho);font-size:18px;font-weight:700}
+.plan .pd{font-size:13px;color:var(--quiet);margin-top:2px;display:block}
+.plan input{width:22px;height:22px;accent-color:#C9A85A}
+.credit{font-size:12px;color:var(--quiet);line-height:1.5;margin:10px 0 0}
+
+/* Firma */
+.sign{padding:36px 20px 8px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.sign .row{display:flex;align-items:center;gap:10px}
+.hanko{width:40px;height:40px;border-radius:4px;background:var(--shu);display:flex;align-items:center;justify-content:center;transform:rotate(-3deg);font-family:var(--mincho);font-size:11px;font-weight:700;line-height:1.05;color:#fff;text-align:center}
+.slogan{font-family:var(--mincho);font-size:15px;color:var(--kin);text-align:center}
+
+/* Navegación */
+nav.tabs{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:rgba(20,27,46,.97);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));padding:6px 2px calc(10px + env(safe-area-inset-bottom));z-index:5}
+nav.tabs button{min-height:54px;background:none;border:none;color:var(--quiet);font-size:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:0}
+nav.tabs button[aria-current="page"]{color:var(--kin);font-weight:700}
+.toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%);background:var(--kinari);color:var(--sumi);padding:10px 16px;border-radius:20px;font-size:14px;opacity:0;transition:opacity .25s;pointer-events:none;z-index:6;max-width:90%;text-align:center}
+.toast.on{opacity:1}
+</style>
+</head>
+<body>
+<div class="app on-hoy">
+
+  <svg class="art" viewBox="0 0 390 540" preserveAspectRatio="xMidYMin slice" aria-hidden="true">
+    <circle cx="342" cy="168" r="24" fill="#C9A85A"></circle>
+    <rect x="290" y="173" width="110" height="10" rx="5" fill="#141B2E" opacity="0.55"></rect>
+    <rect x="-20" y="190" width="150" height="14" rx="7" fill="#C9A85A" opacity="0.55"></rect>
+    <rect x="70" y="200" width="120" height="14" rx="7" fill="#C9A85A" opacity="0.38"></rect>
+    <path d="M0 490 L46 450 L78 468 L132 412 L176 458 L214 430 L262 472 L312 424 L352 456 L390 434 L390 540 L0 540 Z" fill="#1E2740"></path>
+    <rect x="-30" y="450" width="230" height="18" rx="9" fill="#C9A85A" opacity="0.6"></rect>
+    <rect x="130" y="464" width="200" height="18" rx="9" fill="#C9A85A" opacity="0.42"></rect>
+    <rect x="250" y="438" width="170" height="16" rx="8" fill="#C9A85A" opacity="0.5"></rect>
+    <path d="M0 516 L60 486 L110 504 L168 474 L230 500 L290 470 L346 496 L390 482 L390 540 L0 540 Z" fill="#232D49"></path>
+    <rect x="40" y="520" width="260" height="16" rx="8" fill="#C9A85A" opacity="0.4"></rect>
+  </svg>
+
+  <main>
+    <!-- ================= HOY ================= -->
+    <section class="screen on" id="hoy" aria-labelledby="hoy-t">
+      <header class="top">
+        <div>
+          <div class="eyebrow" id="hoy-t">Kanji del día</div>
+          <div class="sub" id="fecha"></div>
+        </div>
+        <span class="muted" style="font-size:13px">Día 12 de racha</span>
+      </header>
+      <button class="season" type="button" data-go="estaciones">
+        <span class="muted" style="font-size:13px">Estación en Japón</span>
+        <b id="season-k"></b>
+        <span id="season-m" style="font-size:14px"></span>
+      </button>
+
+      <div class="hero">
+        <div class="enso">
+          <svg width="260" height="260" viewBox="0 0 260 260" aria-hidden="true">
+            <circle cx="130" cy="130" r="112" fill="none" stroke="#F2ECDD" stroke-width="9" stroke-linecap="round" stroke-dasharray="620 84" transform="rotate(-118 130 130)" opacity="0.9"></circle>
+            <circle cx="131" cy="128" r="106" fill="none" stroke="#F2ECDD" stroke-width="3" stroke-linecap="round" stroke-dasharray="470 196" transform="rotate(-100 130 130)" opacity="0.45"></circle>
+            <path d="M205 44 l6 10 l-3 8 l7 9" fill="none" stroke="#C9A85A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <span class="k" lang="ja" id="k-big">間</span>
+        </div>
+        <div class="reading">
+          <span class="r" id="k-r">ma</span>
+          <span class="muted" style="font-size:15px" id="k-alt"></span>
+        </div>
+        <p class="meaning" id="k-m"></p>
+        <div class="pills">
+          <button class="pill" type="button" id="btn-trazos">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20c4-1 6-4 8-8s5-7 8-8"></path><path d="M14 4c2 1 4 3 6 6"></path></svg>
+            <span id="k-strokes">Practicar trazos</span>
+          </button>
+          <button class="pill" type="button" id="btn-oir">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7"></path></svg>
+            Escuchar
+          </button>
+        </div>
+      </div>
+
+      <div class="sec">
+        <h2>Sus partes</h2>
+        <div class="parts" id="k-parts"></div>
+      </div>
+
+      <div class="sec">
+        <div class="block">
+          <span class="tag muted">Historia real</span>
+          <p id="k-hist"></p>
+        </div>
+        <div class="block">
+          <span class="tag" style="color:var(--kin)">Lectura cultural</span>
+          <p id="k-cult"></p>
+        </div>
+      </div>
+
+      <div class="paper">
+        <svg class="crack" width="150" height="90" viewBox="0 0 150 90" aria-hidden="true"><path d="M150 14 L118 22 L104 40 L86 44 L70 66 L52 70" fill="none" stroke="#C9A85A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M104 40 L112 58" fill="none" stroke="#C9A85A" stroke-width="1.4" stroke-linecap="round"></path></svg>
+        <label for="reflexion" id="k-q"></label>
+        <textarea id="reflexion" rows="4" placeholder="Escribe aquí tu reflexión…"></textarea>
+        <button class="cta" type="button" id="guardar">Guardar en mi diario</button>
+        <p class="status" id="estado" role="status"></p>
+      </div>
+
+      <div class="sec" style="padding-top:20px">
+        <button class="linkrow" type="button" data-go="construir">
+          <span>Jugar: construye kanji con piezas</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- ================= EXPLORAR ================= -->
+    <section class="screen" id="explorar" aria-labelledby="exp-t">
+      <header class="top">
+        <div>
+          <div class="eyebrow">Explorar</div>
+          <h1 class="title" id="exp-t">Caminos para conocer los kanji</h1>
+        </div>
+      </header>
+      <div class="hub">
+        <button class="hubcard" type="button" data-go="coleccion"><span class="hk" lang="ja">集</span><span><span class="hn">Colección</span><span class="hd" style="display:block">Los kanji que ya conociste</span></span><span aria-hidden="true">›</span></button>
+        <button class="hubcard" type="button" data-go="estaciones"><span class="hk" lang="ja">季</span><span><span class="hn">Estaciones</span><span class="hd" style="display:block">Las 24 estaciones del calendario japonés</span></span><span aria-hidden="true">›</span></button>
+        <button class="hubcard" type="button" data-go="cielo"><span class="hk" lang="ja">空</span><span><span class="hn">Cielo</span><span class="hd" style="display:block">El sol, la luna y los planetas en los días de la semana</span></span><span aria-hidden="true">›</span></button>
+        <button class="hubcard" type="button" data-go="construir"><span class="hk" lang="ja">組</span><span><span class="hn">Construir</span><span class="hd" style="display:block">Une piezas y descubre kanji</span></span><span aria-hidden="true">›</span></button>
+        <button class="hubcard" type="button" data-go="mikanji"><span class="hk" lang="ja">名</span><span><span class="hn">Mi kanji</span><span class="hd" style="display:block">Encuentra el kanji de una palabra o intención</span></span><span aria-hidden="true">›</span></button>
+      </div>
+    </section>
+
+    <!-- ================= COLECCIÓN ================= -->
+    <section class="screen" id="coleccion" aria-labelledby="col-t">
+      <button class="back" type="button" data-go="explorar">‹ Explorar</button>
+      <header class="top" style="padding-top:4px">
+        <div>
+          <div class="eyebrow">Tu colección</div>
+          <h1 class="title" id="col-t">Kanji que has conocido</h1>
+        </div>
+      </header>
+      <p class="lead">Toca un kanji para volver a verlo.</p>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <!-- ================= ESTACIONES ================= -->
+    <section class="screen" id="estaciones" aria-labelledby="est-t">
+      <button class="back" type="button" data-go="explorar">‹ Explorar</button>
+      <header class="top" style="padding-top:4px">
+        <div>
+          <div class="eyebrow">Estaciones · 二十四節気</div>
+          <h1 class="title" id="est-t">El año en 24 estaciones</h1>
+        </div>
+      </header>
+      <p class="lead">El calendario tradicional japonés divide el año en 24 estaciones de unos quince días. Cada una tiene un nombre que describe lo que pasa en la naturaleza.</p>
+      <div class="sekki-now" id="sekki-now"></div>
+      <p class="lead" style="margin-top:14px">En Chile las estaciones van al revés: cuando Japón entra en otoño, Santiago entra en primavera.</p>
+      <div class="slist" id="slist"></div>
+      <p class="lead" style="margin-top:14px;font-size:13px">Las fechas son aproximadas y pueden moverse un día según el año.</p>
+    </section>
+
+    <!-- ================= CIELO ================= -->
+    <section class="screen" id="cielo" aria-labelledby="cie-t">
+      <button class="back" type="button" data-go="explorar">‹ Explorar</button>
+      <header class="top" style="padding-top:4px">
+        <div>
+          <div class="eyebrow">Cielo · 空</div>
+          <h1 class="title" id="cie-t">La semana escrita en el cielo</h1>
+        </div>
+      </header>
+      <p class="lead">Como en español, la semana japonesa lleva el nombre del sol, la luna y los planetas. Los planetas se nombran con los cinco elementos: fuego, agua, madera, metal y tierra. Toca un día para practicar su kanji.</p>
+      <div class="days" id="days"></div>
+    </section>
+
+    <!-- ================= CONSTRUIR ================= -->
+    <section class="screen" id="construir" aria-labelledby="con-t">
+      <button class="back" type="button" data-go="explorar">‹ Explorar</button>
+      <header class="top" style="padding-top:4px">
+        <div>
+          <div class="eyebrow">Construir · 組</div>
+          <h1 class="title" id="con-t">Une dos piezas</h1>
+        </div>
+      </header>
+      <p class="lead">Muchos kanji nacen de unir piezas más simples. Elige dos y descubre qué forman.</p>
+      <div class="slots">
+        <div class="slot" id="slot1" aria-label="Primera pieza"></div>
+        <span class="op" aria-hidden="true">+</span>
+        <div class="slot" id="slot2" aria-label="Segunda pieza"></div>
+        <span class="op" aria-hidden="true">=</span>
+        <div class="slot res" id="slot3" aria-live="polite">?</div>
+      </div>
+      <p class="buildmsg" id="buildmsg" role="status"></p>
+      <div class="pieces" id="pieces"></div>
+      <div class="sec">
+        <h2 id="found-t">Descubiertos</h2>
+        <div class="found" id="found"></div>
+      </div>
+    </section>
+
+    <!-- ================= MI KANJI ================= -->
+    <section class="screen" id="mikanji" aria-labelledby="mk-t">
+      <button class="back" type="button" data-go="explorar">‹ Explorar</button>
+      <header class="top" style="padding-top:4px">
+        <div>
+          <div class="eyebrow">Mi kanji · 名</div>
+          <h1 class="title" id="mk-t">¿Qué palabra te representa?</h1>
+        </div>
+      </header>
+      <div class="sec" style="padding-top:8px">
+        <label for="mk-input" class="muted" style="font-size:14px">Escribe una palabra o intención</label>
+        <input type="search" id="mk-input" placeholder="calma, luz, valentía…" autocomplete="off" style="margin-top:8px">
+        <div class="chips" id="mk-chips"></div>
+      </div>
+      <div class="result" id="mk-result" aria-live="polite"></div>
+    </section>
+
+    <!-- ================= SHODŌ ================= -->
+    <section class="screen" id="shodo" aria-labelledby="sho-t">
+      <header class="top">
+        <div>
+          <div class="eyebrow">Shodō · 書道</div>
+          <h1 class="title" id="sho-t">Escribe con tu dedo</h1>
+        </div>
+      </header>
+      <div class="kpick" id="kpick" role="group" aria-label="Elige un kanji"></div>
+      <div class="board-wrap">
+        <div class="board" id="board">
+          <svg viewBox="0 0 109 109" aria-hidden="true">
+            <line x1="54.5" y1="0" x2="54.5" y2="109" stroke="#C9B89A" stroke-width="0.4" stroke-dasharray="2 2"></line>
+            <line x1="0" y1="54.5" x2="109" y2="54.5" stroke="#C9B89A" stroke-width="0.4" stroke-dasharray="2 2"></line>
+            <g id="ghost" fill="none" stroke="#1A1A1F" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.13"></g>
+            <g id="anim" fill="none" stroke="#B83A22" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"></g>
+          </svg>
+          <canvas id="canvas" aria-label="Lienzo para escribir el kanji"></canvas>
+        </div>
+      </div>
+      <div class="shodo-info">
+        <div><span class="sr" id="sh-r"></span> <span class="muted" id="sh-m" style="font-size:15px"></span></div>
+        <span class="muted" style="font-size:14px;white-space:nowrap" id="sh-count"></span>
+      </div>
+      <div class="tools">
+        <button class="pill" type="button" id="sh-order">Ver orden de trazos</button>
+        <button class="pill on" type="button" id="sh-guide" aria-pressed="true">Guía</button>
+        <button class="pill" type="button" id="sh-clear">Borrar</button>
+      </div>
+      <p class="lead" style="margin-top:16px">Los trazos de muestra aparecen en rojo bermellón (朱), el color con que los maestros de caligrafía corrigen a sus alumnos.</p>
+    </section>
+
+    <!-- ================= DIARIO ================= -->
+    <section class="screen" id="diario" aria-labelledby="dia-t">
+      <header class="top">
+        <div>
+          <div class="eyebrow">Tu diario</div>
+          <h1 class="title" id="dia-t">Tus reflexiones</h1>
+        </div>
+      </header>
+      <div class="entries" id="entries"></div>
+    </section>
+
+    <!-- ================= PERFIL ================= -->
+    <section class="screen" id="perfil" aria-labelledby="per-t">
+      <header class="top">
+        <div>
+          <div class="eyebrow">Perfil</div>
+          <h1 class="title" id="per-t">Tu camino, tu 道</h1>
+        </div>
+      </header>
+      <div class="stats">
+        <div class="stat"><b>12</b><span>días de racha</span></div>
+        <div class="stat"><b id="st-k">7</b><span>kanji conocidos</span></div>
+        <div class="stat"><b id="st-r">0</b><span>reflexiones</span></div>
+        <div class="stat"><b id="st-f">0</b><span>kanji construidos</span></div>
+      </div>
+      <div class="paper">
+        <span class="tag" style="position:relative;color:var(--brown)">Tu kanji del año</span>
+        <span class="q">Lo eliges en diciembre</span>
+        <span style="position:relative;font-size:15px;line-height:1.55">Como en Japón, donde cada diciembre se anuncia el kanji que resume el año, tú elegirás el tuyo entre los que conociste.</span>
+      </div>
+      <div class="sec">
+        <h2>Tu ritmo</h2>
+        <fieldset class="plans">
+          <legend class="muted" style="font-size:14px;margin-bottom:10px">¿Cada cuánto quieres conocer un kanji nuevo?</legend>
+          <label class="plan"><span><span class="pn">Un kanji al día</span><span class="pd">Para crear un hábito diario</span></span><input type="radio" name="ritmo" value="diario"></label>
+          <label class="plan"><span><span class="pn">Tres a la semana</span><span class="pd">Con más tiempo para reflexionar</span></span><input type="radio" name="ritmo" value="semana"></label>
+          <label class="plan"><span><span class="pn">A mi propio ritmo</span><span class="pd">Avanzas cuando tú quieras</span></span><input type="radio" name="ritmo" value="libre"></label>
+        </fieldset>
+      </div>
+      <div class="sec">
+        <h2>Sobre esta app</h2>
+        <p style="margin:0;font-size:15px;line-height:1.65"><b style="font-family:var(--mincho);color:var(--kin);font-size:18px">Yū · 優</b> significa ternura. Una invitación a conocer la cultura japonesa a través de sus kanji, un trazo a la vez.</p>
+        <p class="credit">Trazos de los kanji: <a href="https://kanjivg.tagaini.net" target="_blank" rel="noopener">KanjiVG</a>, de Ulrich Apel, con licencia CC BY-SA 3.0.</p>
+      </div>
+    </section>
+
+    <footer class="sign">
+      <div class="row">
+        <div class="hanko" aria-hidden="true">meli<br>talove</div>
+        <span style="font-size:14px">Creado por <b>melitalove</b></span>
+      </div>
+      <span class="slogan">Sabiduría antigua para tu presente</span>
+    </footer>
+  </main>
+
+  <nav class="tabs" aria-label="Navegación principal">
+    <button type="button" data-tab="hoy" aria-current="page">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-4-6.9"></path></svg>
+      Hoy
+    </button>
+    <button type="button" data-tab="explorar">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="m15.5 8.5-2 5-5 2 2-5z"></path></svg>
+      Explorar
+    </button>
+    <button type="button" data-tab="shodo">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 3 9.5 12.5"></path><path d="M9.5 12.5c-2 0-4 1.5-4 4 0 1.5-1 2.5-2.5 3 3 1 7 .5 8.5-2.5.8-1.6.2-3.3-2-4.5z"></path></svg>
+      Shodō
+    </button>
+    <button type="button" data-tab="diario">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h12a4 4 0 0 1 4 4v12H8a4 4 0 0 1-4-4z"></path><path d="M8 9h8M8 13h6"></path></svg>
+      Diario
+    </button>
+    <button type="button" data-tab="perfil">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>
+      Perfil
+    </button>
+  </nav>
+
+  <div class="toast" id="toast" role="status"></div>
+</div>
+
+<script>
+(function(){
+  var STROKES = {"休":["M35,16.5c0.25,1.75,0.25,4.25-0.88,6.8C28.91,35.01,22.37,46.02,10.5,60.29","M26.28,42.5c0.72,1.25,1.26,3.48,1.26,4.75c0,12.75-0.07,29.88-0.26,42.25c-0.02,1.54-0.04,2.97-0.04,4.25","M37.65,38.83c2.45,0.97,5.18,0.75,7.73,0.54c11.76-0.97,24.94-3.35,37.49-4.01c2.65-0.14,5.39-0.22,7.99,0.39","M61.43,14c0.82,0.75,1.87,2.12,1.87,3.7c0,8.8,0.05,53.72-0.12,72.05c-0.03,2.88-0.06,4.91-0.08,5.75","M62.43,38.32c0,2.18-1.1,4.31-1.9,6.04C54.57,57.4,44.96,71.84,35,78.75","M64.12,38.08c4.45,8.37,16.21,25.33,24.99,33.19c1.96,1.76,4.35,4.18,6.9,5"],"和":["M48.62,15.5c0.03,0.72-0.29,1.64-1.04,2.34c-3.33,3.12-13.46,7.99-26.82,11.41","M12.94,45.38c2.31,0.62,5.12,0.6,7.56,0.27c8.62-1.15,19.25-3.15,28.62-4.27c1.65-0.2,4.24-0.12,5.88,0.33","M37.39,27.2c0.96,0.96,1.51,1.93,1.51,2.8c0,2.94,0,43.09-0.07,58.99C38.81,92,38.8,94.14,38.78,95","M38.03,44.02c0,1.23-0.26,2.66-0.54,3.39c-4.68,11.92-14.53,26.71-23.49,32.9","M41.14,53.81c4.38,1.75,9.87,7.12,11.8,10.63","M60,47.19c0.97,0.97,1.52,2.14,1.76,3.43c1.26,6.69,2.17,15.52,3.12,23.48c0.17,1.41,0.33,2.8,0.49,4.14","M62.44,48.81c11.87-1.69,21.33-2.94,27.06-3.67c2.81-0.36,4.46,0.83,3.89,3.77c-1.2,6.23-3.01,15.28-4.71,23.5","M65.6,75.56c9.62-1.12,16.1-1.83,22.04-2.37c1.03-0.09,2.04-0.18,3.07-0.26"],"土":["M26.63,50.89c1.63,0.4,4.64,0.6,6.26,0.4C43.5,50,62.12,48,75.66,46.92c2.71-0.22,4.36,0.19,5.72,0.39","M52.17,17.37c1.17,1.17,2.02,3.13,2.02,4.64c0,10.25,0.14,61.06,0.14,63.36","M15.38,87.73c2.12,0.54,6.01,0.73,8.12,0.54C46,86.25,69,84.62,90.34,83.79c3.53-0.14,5.65,0.26,7.41,0.53"],"心":["M16.88,52.75c0,6.32-1.46,17.69-3.75,23","M31.25,49.25c9,22.75,27,35.5,53.25,32.25c7.75-0.96,7.25-4.75,3-9.5","M50.25,26c2,5.12,7.5,13.75,8.75,7.75","M85.5,30c4,2.75,7.62,7,10.5,14"],"日":["M31.5,24.5c1.12,1.12,1.74,2.75,1.74,4.75c0,1.6-0.16,38.11-0.09,53.5c0.02,3.82,0.05,6.35,0.09,6.75","M33.48,26c0.8-0.05,37.67-3.01,40.77-3.25c3.19-0.25,5,1.75,5,4.25c0,4-0.22,40.84-0.23,56c0,3.48,0,5.72,0,6","M34.22,55.25c7.78-0.5,35.9-2.5,44.06-2.75","M34.23,86.5c10.52-0.75,34.15-2.12,43.81-2.25"],"明":["M16.75,25.22c0.89,0.89,1.32,2.29,1.32,3.66c0,1.11,0.07,27.44,0,37.63c-0.02,2.32-0.02,3.78-0.02,3.91","M19.29,27.75c5.66-0.81,19.54-2.59,21.22-2.75c1.76-0.17,2.89,1.89,2.75,2.91c-0.23,1.7-0.45,27.34-0.52,36.6c-0.01,1.9-0.02,3.11-0.02,3.29","M19.16,46.97C23.5,46.5,37,45.12,41.77,44.76","M19,66.59c8.5-0.97,14.37-1.59,22.49-2.11","M57.55,16c0.95,1.25,1.09,2.48,1.11,3.5c1.09,49.25-4.41,64.75-17.41,75.75","M59.5,17.98c6.56-1.04,21.76-3.51,23.07-3.73c2.97-0.5,5.21,0.62,5.21,4.5c0,1.49,0.19,50.25,0.19,70.5c0,11.88-7.22,3.5-8.3,2.5","M59.77,39c7.85-1,19.73-2.25,26.95-2.75","M59.25,57.75c6.62-0.62,20-1.5,27.36-2"],"月":["M34.25,16.25c1,1,1.48,2.38,1.5,4c0.38,33.62,2.38,59.38-11,73.25","M36.25,19c4.12-0.62,31.49-4.78,33.25-5c4-0.5,5.5,1.12,5.5,4.75c0,2.76-0.5,49.25-0.5,69.5c0,13-6.25,4-8.75,1.75","M37.25,38c10.25-1.5,27.25-3.75,36.25-4.5","M37,58.25c8.75-1.12,27-3.5,36.25-4"],"木":["M19.5,39.86c2.45,0.57,5.23,0.8,8.04,0.57C40.75,39.38,63,36.5,79.78,36.15c2.8-0.06,4.54,0.1,7.34,0.5","M51.75,10.5c1.19,1.19,2,3,2,5c0,8.65,0,55.15-0.14,74.75c-0.03,4.19-0.07,7.15-0.11,8.25","M50.75,39.5c0,1.12-0.61,2.44-1.42,3.95C41.75,57.5,26.7,73.93,15.75,80.25","M54.5,39c4.62,6,23,25.75,31.76,34.61c2.27,2.29,4.61,4.39,7.49,5.64"],"水":["M52.77,15.08c1.08,1.08,1.67,2.49,1.76,5.52c0.4,14.55-0.26,62.16-0.26,67.12c0,9.78-7.52,0.03-9.02-1.22","M17.5,45.75c1.75,0.62,3.73,0.43,5.25,0C25.88,44.88,36.09,41,38.59,40s4.47,1.24,3.75,3.5C39,54,28.25,69,19,74.75","M81.22,27.5c-0.22,1.25-0.72,2.25-1.52,2.97c-5.64,5.1-12.45,9.78-22.45,13.78","M57,46c8.82,10.73,19.23,21.46,28.42,27.42c2.16,1.4,4.52,3,7.08,3.58"],"火":["M24.25,34c3.27,3.33,8.5,13,9.5,17.75","M83,27.25c0.5,1.38,0.22,2.74-0.5,4.25c-2.38,5-7.5,12.12-12.75,17.25","M52.5,14.25c1,1.25,1.5,3.12,1.5,5C54,69,39.62,80,21,91.5","M52.75,50c12.49,14.06,25.01,28.42,33.62,36.13c2.7,2.42,4.9,4.02,8.38,4.87"],"縁":["M25.63,12.92c0.34,1.34,0.42,2.36-0.17,3.8c-1.7,4.15-4.7,10.28-9.05,16.47c-0.55,0.78-0.43,2.35,0.25,2.6c3.6,1.34,6.1,2.33,9.22,4.31","M37.3,22.93c0.32,0.95,0.32,2.2-0.25,3.09c-6.11,9.54-13.3,19.48-21.23,28.44c-1.75,1.97-0.57,3.42,1.4,2.84c5.04-1.46,12.53-3.68,19.79-5.78","M33.88,45.13c2.43,1.96,6.27,8.05,6.87,11.1","M26.39,58.37c0.81,0.81,1.23,2.01,1.23,3.59c0,8.46-0.22,20.06-0.21,27.05c0.01,2.75,0.01,5.06,0.01,6.67","M17.37,67.85c0.38,1.15,0.5,2.4,0.13,3.68c-1.37,4.69-4.91,13.9-7,17.9","M35.68,66.54c2.12,3.65,4.07,11.46,4.24,15.44","M51.87,16.75c1.88,0.38,3.06,0.48,4.95,0.25c8.3-1,12.68-1.75,19.91-2.5c2.67-0.28,4.02,1.12,3.63,3.5c-0.78,4.72-2.36,12.25-3.8,19.75","M52.5,28.96c1.99,0.34,3.34,0.39,5.37,0.1c9.75-1.43,15.04-2.44,19.22-2.65","M41.56,41.74c2.25,0.87,5.17,0.37,7.45,0.06c12.48-1.68,27.48-3.43,39.85-4.6c2.39-0.23,4.85-0.37,7.18,0.18","M66.69,42.95c0.15,0.99-0.17,1.96-0.75,2.68C63,49.25,55.91,55.08,45.91,59.09","M61.24,51.57c7.26,4.68,14.66,25.51,8.7,42.3c-2.54,7.16-6.59,0.85-7.54,0.04","M63.05,58.69c0.14,0.98-0.26,1.92-0.9,2.65c-2.65,3.03-8.4,8.03-17.1,12.68","M66.97,67.46c0.14,1.21-0.18,2.32-0.82,3.36C63,75.88,54.83,84.64,42.45,90.8","M86.89,48.44c0.11,0.83-0.25,1.55-0.75,2.18c-2.24,2.83-6.84,6.31-15.48,10.94","M71.41,62.64c2.84,3.17,13.43,15.81,19.17,22.4c1.92,2.21,4.05,3.96,6.02,5.35"],"道":["M49.38,14.88c2.61,1.78,6.73,7.3,7.38,10.06","M77.25,12.5c0.06,0.84-0.03,1.66-0.37,2.42c-1.38,3.08-3.38,6.7-6.63,10.2","M42.06,32.6c1.75,0.45,4.97,0.38,6.7,0.2c9.99-1.05,25.86-2.93,36.82-3.2c2.91-0.07,4.8,0.15,6.12,0.44","M64.26,33.62c0.25,0.1-0.23,1.75-0.39,2.04c-1.03,1.93-2.08,4.55-4.5,7.09","M51.06,43.52c0.77,0.77,1.13,1.71,1.13,2.82c0,0.9-0.1,22.98-0.06,31.9c0.01,2.08,0.03,3.45,0.06,3.66","M53.01,45.09c6.24-0.71,22.66-2.75,24.6-2.88c1.96-0.14,3.35,0.55,3.35,2.81c0,1.08-0.57,23.4-0.8,32.24c-0.05,2-0.09,3.28-0.12,3.43","M52.9,55.9c6.1-0.4,20.85-2.15,26.64-2.34","M53.11,67.65c6.85-0.47,19.47-1.75,26.13-1.75","M53.36,79.25c5.14,0,18.66-1.07,25.31-1.07","M19.75,20c3.38,1.75,8,6.12,9.5,8.75","M13,51.53c2.25,0.86,3.75,0.43,4.75,0.22s9-3.47,10.5-3.9c2.96-0.85,4.22,0.21,2.44,3.03c-6.56,10.38-6.81,8.5-0.11,14.4c2.39,2.1,2.15,3.52-0.57,5.48C25.5,74,21.75,76.25,17.5,79.04","M12.5,81.71c3.11-0.47,9.22-0.87,13.97-0.71c7.15,0.25,31.13,8.25,35.71,9.46C74.61,93.76,81.62,95.5,91,96.05"],"金":["M51.75,11.88c0.25,1.52-0.22,3.57-0.8,4.84C47.73,23.79,33.13,47.1,14.5,58","M52.25,18.25c9.5,7.5,34.14,30.88,37.21,32.67c3.12,1.82,4.14,2.66,5.54,2.83","M34.02,47.08c1.69,0.65,3.85,0.36,5.6,0.21c6.91-0.6,14.33-1.69,23.99-2.64c2.07-0.2,4.1-0.4,6.15,0.12","M30.18,64.96c1.95,0.67,4.47,0.31,6.47,0.12c9.24-0.87,17.42-1.58,31.35-2.53c2.3-0.16,4.68-0.36,6.96,0.08","M51.47,48.82c0.89,0.85,0.89,3.76,0.89,4.43c0,3.64,0.27,38.71,0.22,39.82","M31,74.75c3.25,3,7.48,9.27,8.5,12","M73.01,72.11c0.24,1.14,0.11,2.46-0.54,3.51C70.38,79,66.44,83.22,63,86","M18.5,94.86c2.88,1.01,6.41,0.4,9.37,0.15c16.55-1.42,32.95-2.12,51.51-3c3.13-0.15,6.32-0.27,9.38,0.59"],"間":["M18.64,15.3c0.71,0.71,1.18,1.82,1.18,3.43c0,3.89-0.05,56.65-0.19,72.77c-0.02,1.92-0.03,4.03-0.05,4.65","M21.01,16.81c5.75-0.6,18.73-2.74,20.5-2.84c1.85-0.1,2.86,0.28,2.9,2.02c0.06,2.75-0.5,16.1-0.85,20.76c-0.12,1.55-0.19,2.57-0.19,2.7","M20.95,27.27c5.99-0.61,14.92-2.02,21.88-2.6","M21.02,39.04c8.11-1.19,14.14-2.1,21.31-2.64","M63.19,13.1c0.98,0.98,1.34,2.15,1.34,2.97c0,5.8-0.08,12.65-0.06,18.93c0.01,2.01,0.02,3.4,0.06,3.58","M65.32,14.77c5.97-0.68,20.69-3.19,22.38-3.28c1.8-0.09,2.81,0.88,2.81,2.82c0,17-0.22,66.12-0.22,78.44c0,10.5-6.35,1.36-7.72,0.23","M65.63,24.79c4.49-0.42,19.73-1.99,23.35-1.99","M65.22,36.07c6.41-0.32,16.53-1.32,23.49-1.81","M40.56,50.95c0.74,0.74,1.04,1.93,1.04,2.99c0,0.83-0.08,20.84-0.05,29.06c0.01,2.25,0.02,2.77,0.05,3","M42.26,52.09c5.56-0.48,19.71-1.98,21.3-2.1c1.68-0.13,2.76,1.46,2.63,2.24c-0.21,1.24-0.41,20.66-0.48,29.02c-0.02,2.29-0.03,3.8-0.03,3.97","M42.64,66.6c5.11-0.48,17.36-1.73,21.88-2.07","M42.25,82.8c5.13-0.3,17-1.55,22.26-2.05"]};
+
+  var KANJI = [
+    {k:'間', r:'ma', kana:'ま', alt:'también se lee <i>kan</i> · <i>ken</i> · <i>aida</i>', m:'El espacio entre las cosas',
+     parts:[['門','puerta'],['日','sol']], res:'espacio',
+     hist:'La forma antigua era <span lang="ja">閒</span>: una luna vista por la rendija de una puerta. Con el tiempo, la luna se cambió por el sol.',
+     cult:'En Japón, <i>ma</i> es la pausa con sentido: el silencio en la música, el espacio vacío en una habitación, el tiempo antes de responder. No es un hueco, es parte de la obra.',
+     q:'¿Dónde falta una pausa en tu día?'},
+    {k:'和', r:'wa', kana:'わ', alt:'también se lee <i>yawa(ragu)</i> · <i>nago(mu)</i>', m:'Armonía',
+     parts:[['禾','planta de arroz (sonido)'],['口','boca']], res:'armonía',
+     hist:'禾 aporta el sonido y 口 (boca) el sentido. Su significado antiguo era “responder”, voces que concuerdan. La idea de “arroz en la boca = paz” es una lectura simbólica moderna, no su origen.',
+     cult:'<i>Wa</i> es armonía y también es Japón mismo: 和食 <i>washoku</i> es la comida japonesa. Habla de cuidar el equilibrio del grupo.',
+     q:'¿Con quién quieres estar en armonía hoy, empezando por ti?'},
+    {k:'道', r:'michi', kana:'みち', alt:'también se lee <i>dō</i> · <i>tō</i>', m:'Camino',
+     parts:[['辶','avanzar'],['首','cabeza (también sonido)']], res:'camino',
+     hist:'Une 辶, que indica movimiento, con 首 (cabeza), que además aporta el sonido.',
+     cult:'Está en 柔道 judo, 茶道 ceremonia del té y 書道 caligrafía: el arte entendido como un camino que se recorre toda la vida, no como una meta.',
+     q:'¿Qué práctica diaria es tu camino?'},
+    {k:'縁', r:'en', kana:'えん', alt:'también se lee <i>enishi</i> · <i>fuchi</i>', m:'Vínculo, lazo del destino',
+     parts:[['糸','hilo'],['彖','parte que da el sonido']], res:'vínculo',
+     hist:'糸 (hilo) da el sentido y la otra parte aporta el sonido. Su significado original era el borde de una tela; de ahí pasó a “lo que une”.',
+     cult:'En Japón se dice que las personas se encuentran por <i>en</i>, como un hilo invisible. Agradecer el <i>go-en</i> es valorar a quien llega a tu vida.',
+     q:'¿Qué encuentro reciente sientes como un vínculo importante?'},
+    {k:'心', r:'kokoro', kana:'こころ', alt:'también se lee <i>shin</i>', m:'Corazón, mente y espíritu',
+     parts:null, res:'corazón',
+     hist:'Es un pictograma: en su forma antigua era el dibujo de un corazón.',
+     cult:'<i>Kokoro</i> reúne corazón, mente y espíritu en una sola palabra. En la mirada japonesa, pensar y sentir no se separan.',
+     q:'¿Qué te está diciendo tu corazón hoy que tu mente no escucha?'},
+    {k:'休', r:'yasu(mu)', kana:'やすむ', alt:'también se lee <i>kyū</i>', m:'Descansar',
+     parts:[['亻','persona'],['木','árbol']], res:'descansar',
+     hist:'Una persona 亻 junto a un árbol 木: alguien que se detiene a descansar a su sombra.',
+     cult:'Aparece en 休日 <i>kyūjitsu</i>, día de descanso, y en 休憩 <i>kyūkei</i>, la pausa breve en el trabajo. El descanso es parte del ritmo, no su interrupción.',
+     q:'¿Cuándo fue la última vez que descansaste sin culpa?'},
+    {k:'明', r:'aka(rui)', kana:'あかるい', alt:'también se lee <i>mei</i> · <i>myō</i>', m:'Luz, claridad',
+     parts:[['日','sol'],['月','luna']], res:'claridad',
+     hist:'En formas antiguas era la luna brillando por una ventana. Con el tiempo se escribió con sol 日 y luna 月.',
+     cult:'Está en 明日 <i>ashita</i>, “mañana”: lo que viene se escribe con luz.',
+     q:'¿Qué se volvió más claro para ti esta semana?'}
+  ];
+
+  var DAYS = [
+    {k:'日', d:'Domingo', jp:'nichiyōbi', kana:'にちようび', star:'Sol', el:'el sol'},
+    {k:'月', d:'Lunes', jp:'getsuyōbi', kana:'げつようび', star:'Luna', el:'la luna'},
+    {k:'火', d:'Martes', jp:'kayōbi', kana:'かようび', star:'火星 Marte', el:'fuego'},
+    {k:'水', d:'Miércoles', jp:'suiyōbi', kana:'すいようび', star:'水星 Mercurio', el:'agua'},
+    {k:'木', d:'Jueves', jp:'mokuyōbi', kana:'もくようび', star:'木星 Júpiter', el:'madera'},
+    {k:'金', d:'Viernes', jp:'kin\'yōbi', kana:'きんようび', star:'金星 Venus', el:'metal, oro'},
+    {k:'土', d:'Sábado', jp:'doyōbi', kana:'どようび', star:'土星 Saturno', el:'tierra'}
+  ];
+
+  var SEKKI = [
+    {k:'小寒', r:'shōkan', m:'Pequeño frío', d:[1,5], t:'Entra el frío.'},
+    {k:'大寒', r:'daikan', m:'Gran frío', d:[1,20], t:'El frío más intenso del año.'},
+    {k:'立春', r:'risshun', m:'Comienzo de la primavera', d:[2,4], t:'El calendario tradicional marca aquí el inicio de la primavera.'},
+    {k:'雨水', r:'usui', m:'Agua de lluvia', d:[2,19], t:'La nieve empieza a convertirse en lluvia.'},
+    {k:'啓蟄', r:'keichitsu', m:'Despertar de los insectos', d:[3,5], t:'Los insectos despiertan y salen de la tierra.'},
+    {k:'春分', r:'shunbun', m:'Equinoccio de primavera', d:[3,20], t:'El día y la noche duran lo mismo.'},
+    {k:'清明', r:'seimei', m:'Pureza y claridad', d:[4,4], t:'Todo se ve limpio y luminoso.'},
+    {k:'穀雨', r:'kokuu', m:'Lluvia de los granos', d:[4,20], t:'Lluvias suaves que nutren los cultivos.'},
+    {k:'立夏', r:'rikka', m:'Comienzo del verano', d:[5,5], t:'Comienza el verano.'},
+    {k:'小満', r:'shōman', m:'Pequeña plenitud', d:[5,21], t:'La naturaleza empieza a llenarse de vida.'},
+    {k:'芒種', r:'bōshu', m:'Siembra del grano', d:[6,5], t:'Tiempo de sembrar el arroz.'},
+    {k:'夏至', r:'geshi', m:'Solsticio de verano', d:[6,21], t:'El día más largo del año.'},
+    {k:'小暑', r:'shōsho', m:'Pequeño calor', d:[7,7], t:'Empieza el calor.'},
+    {k:'大暑', r:'taisho', m:'Gran calor', d:[7,23], t:'El calor más intenso del año.'},
+    {k:'立秋', r:'risshū', m:'Comienzo del otoño', d:[8,7], t:'Comienza el otoño, aunque aún hace calor.'},
+    {k:'処暑', r:'shosho', m:'Fin del calor', d:[8,23], t:'El calor empieza a ceder.'},
+    {k:'白露', r:'hakuro', m:'Rocío blanco', d:[9,7], t:'El rocío blanco aparece sobre las plantas.'},
+    {k:'秋分', r:'shūbun', m:'Equinoccio de otoño', d:[9,23], t:'El día y la noche vuelven a igualarse.'},
+    {k:'寒露', r:'kanro', m:'Rocío frío', d:[10,8], t:'El rocío se vuelve frío al amanecer.'},
+    {k:'霜降', r:'sōkō', m:'Descenso de la escarcha', d:[10,23], t:'Cae la primera escarcha.'},
+    {k:'立冬', r:'rittō', m:'Comienzo del invierno', d:[11,7], t:'Comienza el invierno.'},
+    {k:'小雪', r:'shōsetsu', m:'Pequeña nieve', d:[11,22], t:'Llegan las primeras nevadas suaves.'},
+    {k:'大雪', r:'taisetsu', m:'Gran nieve', d:[12,7], t:'Nieva con fuerza.'},
+    {k:'冬至', r:'tōji', m:'Solsticio de invierno', d:[12,21], t:'La noche más larga del año.'}
+  ];
+  var SEASON_OF = function(i){ return i<2||i>=20 ? 'Invierno' : i<8 ? 'Primavera' : i<14 ? 'Verano' : 'Otoño'; };
+
+  var RECIPES = [
+    ['亻','木','休','descansar','Una persona junto a un árbol: detenerse a descansar.'],
+    ['日','月','明','claridad','El sol y la luna juntos: lo luminoso.'],
+    ['門','日','間','espacio','Luz que entra por una puerta: el espacio entre las cosas.'],
+    ['木','木','林','arboleda','Dos árboles: un bosquecillo.'],
+    ['林','木','森','bosque','Tres árboles: un bosque frondoso.'],
+    ['亻','言','信','confianza','Una persona y su palabra: confiar.'],
+    ['女','子','好','gustar, querer','Mujer y niño juntos: lo que se quiere.'],
+    ['田','力','男','hombre','Campo de cultivo y fuerza: quien trabajaba la tierra.'],
+    ['口','鳥','鳴','cantar (un ave)','Boca y ave: el canto de un pájaro.'],
+    ['刃','心','忍','soportar','Un filo sobre el corazón: aguantar con paciencia.'],
+    ['艹','化','花','flor','Hierba y 化 (cambiar), que también aporta el sonido.'],
+    ['日','生','星','estrella','日 da el sentido de luz y 生 aporta el sonido.']
+  ];
+  var PIECES = ['亻','木','日','月','門','林','言','女','子','田','力','口','鳥','刃','心','艹','化','生'];
+
+  var WORDS = [
+    {w:['calma','tranquilidad','serenidad','quietud'], k:'静', r:'shizuka', kana:'しずか', m:'Calma, quietud', n:'Une 青 y 争; 青 aporta el sonido. Expresa lo que está en reposo.'},
+    {w:['paz'], k:'平和', r:'heiwa', kana:'へいわ', m:'Paz', n:'平 (plano, sereno) + 和 (armonía).'},
+    {w:['armonia'], k:'和', r:'wa', kana:'わ', m:'Armonía', n:'Es uno de los kanji de tu colección. Representa también a Japón.'},
+    {w:['valentia','coraje','valor','valiente'], k:'勇', r:'yū', kana:'ゆう', m:'Valentía', n:'Lleva 力 (fuerza) en la parte de abajo; la parte de arriba aporta el sonido.'},
+    {w:['amor','amar','querer'], k:'愛', r:'ai', kana:'あい', m:'Amor', n:'Lleva 心 (corazón) en su centro.'},
+    {w:['fuerza','fortaleza'], k:'力', r:'chikara', kana:'ちから', m:'Fuerza', n:'Es un pictograma antiguo; suele explicarse como un brazo con fuerza o un arado.'},
+    {w:['esperanza','deseo','anhelo'], k:'望', r:'nozomi', kana:'のぞみ', m:'Esperanza, deseo', n:'Contiene 月 (luna). En su forma antigua mostraba a una persona que mira la luna a lo lejos.'},
+    {w:['libertad','libre'], k:'自由', r:'jiyū', kana:'じゆう', m:'Libertad', n:'自 (uno mismo) + 由 (origen, motivo): actuar desde uno mismo.'},
+    {w:['sabiduria','sabio','sabia'], k:'智', r:'chi', kana:'ち', m:'Sabiduría', n:'Une 知 (saber) con 日 (sol) debajo.'},
+    {w:['luz','brillo'], k:'光', r:'hikari', kana:'ひかり', m:'Luz', n:'En su forma antigua: fuego sobre una persona, alguien que porta la luz.'},
+    {w:['alegria','gozo'], k:'喜', r:'yorokobi', kana:'よろこび', m:'Alegría', n:'Une un tambor y una boca 口: la alegría de la música y el canto.'},
+    {w:['felicidad','feliz','suerte','fortuna'], k:'幸', r:'shiawa(se)', kana:'しあわせ', m:'Felicidad, buena fortuna', n:'Su forma antigua era un grillete: la suerte de librarse de él.'},
+    {w:['gratitud','gracias','agradecimiento'], k:'感謝', r:'kansha', kana:'かんしゃ', m:'Gratitud', n:'感 (sentir) + 謝 (agradecer).'},
+    {w:['sueno','suenos','sonar'], k:'夢', r:'yume', kana:'ゆめ', m:'Sueño', n:'Lleva 夕 (atardecer, noche) en la parte de abajo.'},
+    {w:['vida','vivir','nacer'], k:'生', r:'sei · i(kiru)', kana:'いきる', m:'Vida, vivir', n:'Pictograma de un brote que sale de la tierra.'},
+    {w:['camino','sendero'], k:'道', r:'michi', kana:'みち', m:'Camino', n:'Es uno de los kanji de tu colección.'},
+    {w:['corazon','alma','espiritu','mente'], k:'心', r:'kokoro', kana:'こころ', m:'Corazón, mente y espíritu', n:'Es uno de los kanji de tu colección.'},
+    {w:['descanso','descansar','pausa'], k:'休', r:'yasu(mu)', kana:'やすむ', m:'Descansar', n:'Es uno de los kanji de tu colección.'},
+    {w:['claridad','claro'], k:'明', r:'aka(rui)', kana:'あかるい', m:'Luz, claridad', n:'Es uno de los kanji de tu colección.'},
+    {w:['vinculo','destino','lazo','conexion'], k:'縁', r:'en', kana:'えん', m:'Vínculo, lazo del destino', n:'Es uno de los kanji de tu colección.'},
+    {w:['espacio','silencio'], k:'間', r:'ma', kana:'ま', m:'El espacio entre las cosas', n:'Es uno de los kanji de tu colección.'},
+    {w:['paciencia','resistencia','aguante'], k:'忍', r:'nin · shino(bu)', kana:'しのぶ', m:'Paciencia, soportar', n:'Un filo 刃 sobre el corazón 心.'},
+    {w:['confianza','fe','confiar'], k:'信', r:'shin', kana:'しん', m:'Confianza', n:'Una persona 亻 y su palabra 言.'},
+    {w:['belleza','bello','bella','hermoso'], k:'美', r:'bi · utsuku(shii)', kana:'うつくしい', m:'Belleza', n:'Une 羊 (oveja) y 大 (grande).'},
+    {w:['fuego'], k:'火', r:'hi', kana:'ひ', m:'Fuego', n:'Pictograma de llamas.'},
+    {w:['agua'], k:'水', r:'mizu', kana:'みず', m:'Agua', n:'Pictograma de una corriente de agua.'},
+    {w:['luna'], k:'月', r:'tsuki', kana:'つき', m:'Luna', n:'Pictograma de una luna creciente.'},
+    {w:['sol','dia'], k:'日', r:'hi', kana:'ひ', m:'Sol, día', n:'Pictograma del sol.'},
+    {w:['estrella','estrellas'], k:'星', r:'hoshi', kana:'ほし', m:'Estrella', n:'日 da el sentido de luz y 生 aporta el sonido.'},
+    {w:['mar','oceano'], k:'海', r:'umi', kana:'うみ', m:'Mar', n:'氵 (agua) + 毎, que aporta el sonido.'},
+    {w:['flor','flores'], k:'花', r:'hana', kana:'はな', m:'Flor', n:'Hierba 艹 + 化 (cambiar), que también aporta el sonido.'},
+    {w:['bosque','naturaleza'], k:'森', r:'mori', kana:'もり', m:'Bosque', n:'Tres árboles 木 juntos.'},
+    {w:['tierra'], k:'土', r:'tsuchi', kana:'つち', m:'Tierra', n:'Pictograma de un montículo de tierra.'},
+    {w:['oro','dorado','aureo','metal'], k:'金', r:'kin', kana:'きん', m:'Oro, metal', n:'También es el kanji del viernes, día de Venus.'},
+    {w:['arbol','madera'], k:'木', r:'ki', kana:'き', m:'Árbol', n:'Pictograma de un árbol con ramas y raíces.'}
+  ];
+  var CHIPS = ['calma','luz','valentía','amor','esperanza','gratitud','libertad','belleza'];
+
+  var TODAY = 0, current = 0;
+  var DKEY='melitalove-kanji-diario', FKEY='melitalove-kanji-construidos', RKEY='melitalove-kanji-ritmo';
+  var $ = function(id){ return document.getElementById(id); };
+  var all = function(sel){ return Array.prototype.slice.call(document.querySelectorAll(sel)); };
+  function getLS(k,def){ try{ var v=localStorage.getItem(k); return v===null?def:JSON.parse(v); }catch(e){ return def; } }
+  function setLS(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); return true; }catch(e){ return false; } }
+  function esc(t){ return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function norm(t){ return t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim(); }
+
+  var meses=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  var dias=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+  var hoy=new Date();
+  $('fecha').textContent = dias[hoy.getDay()]+' '+hoy.getDate()+' de '+meses[hoy.getMonth()];
+
+  // ---------- Toast y voz ----------
+  var toastTimer;
+  function toast(msg){ var t=$('toast'); t.textContent=msg; t.classList.add('on'); clearTimeout(toastTimer); toastTimer=setTimeout(function(){t.classList.remove('on');},2600); }
+  function speak(kana){
+    if(!('speechSynthesis' in window)){ toast('Este navegador no puede leer en voz alta.'); return; }
+    var u=new SpeechSynthesisUtterance(kana); u.lang='ja-JP'; u.rate=0.8;
+    var v=speechSynthesis.getVoices().filter(function(x){return /^ja/i.test(x.lang);})[0];
+    if(v) u.voice=v; else toast('Si no escuchas nada, instala una voz en japonés en tu teléfono.');
+    speechSynthesis.cancel(); speechSynthesis.speak(u);
+  }
+
+  // ---------- Navegación ----------
+  var PARENT={hoy:'hoy',explorar:'explorar',coleccion:'explorar',estaciones:'explorar',cielo:'explorar',construir:'explorar',mikanji:'explorar',shodo:'shodo',diario:'diario',perfil:'perfil'};
+  var moon='<svg class="moon-s" width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="14" fill="#C9A85A"></circle><rect x="0" y="19" width="34" height="5" rx="2.5" fill="#141B2E" opacity="0.55"></rect></svg>';
+  all('.screen:not(#hoy) header.top').forEach(function(h){ h.insertAdjacentHTML('beforeend',moon); });
+
+  function go(id){
+    all('.screen').forEach(function(s){ s.classList.toggle('on', s.id===id); });
+    document.querySelector('.app').classList.toggle('on-hoy', id==='hoy');
+    all('nav.tabs button').forEach(function(b){
+      if(b.getAttribute('data-tab')===PARENT[id]) b.setAttribute('aria-current','page'); else b.removeAttribute('aria-current');
+    });
+    if(id==='diario') renderDiary();
+    if(id==='perfil') renderStats();
+    if(id==='shodo') setTimeout(sizeCanvas,0);
+    if(location.hash!=='#'+id) history.replaceState(null,'','#'+id);
+    window.scrollTo(0,0);
+  }
+  all('nav.tabs button').forEach(function(b){
+    b.addEventListener('click',function(){ var t=b.getAttribute('data-tab'); if(t==='hoy' && current!==TODAY) showKanji(TODAY); go(t); });
+  });
+  all('[data-go]').forEach(function(b){ b.addEventListener('click',function(){ go(b.getAttribute('data-go')); }); });
+
+  // ---------- Hoy ----------
+  function showKanji(i){
+    current=i; var d=KANJI[i];
+    $('hoy-t').textContent = i===TODAY ? 'Kanji del día' : 'Explorando tu colección';
+    $('k-big').textContent=d.k; $('k-r').textContent=d.r; $('k-alt').innerHTML=d.alt; $('k-m').textContent=d.m;
+    $('k-strokes').textContent='Practicar trazos ('+STROKES[d.k].length+')';
+    $('k-hist').innerHTML=d.hist; $('k-cult').innerHTML=d.cult; $('k-q').textContent=d.q;
+    var p=$('k-parts');
+    if(d.parts){
+      p.innerHTML = d.parts.map(function(x){ return '<div class="part"><span class="pk" lang="ja">'+x[0]+'</span><span>'+x[1]+'</span></div>'; }).join('<span class="op" aria-hidden="true">+</span>')
+        + '<span class="op" aria-hidden="true">=</span><div class="part result"><span class="pk" lang="ja">'+d.k+'</span><span>'+d.res+'</span></div>';
+    } else {
+      p.innerHTML = '<div class="part result" style="flex:none;width:110px"><span class="pk" lang="ja">'+d.k+'</span><span>'+d.res+'</span></div><span style="font-size:15px;line-height:1.5">No se divide: es un dibujo completo, un pictograma.</span>';
+    }
+    var prev = getLS(DKEY,[]).filter(function(e){return e.k===d.k;})[0];
+    $('reflexion').value = prev ? prev.t : '';
+    $('estado').textContent='';
+  }
+  $('btn-trazos').addEventListener('click',function(){ openShodo(KANJI[current].k); });
+  $('btn-oir').addEventListener('click',function(){ speak(KANJI[current].kana); });
+  $('guardar').addEventListener('click',function(){
+    var t=$('reflexion').value.trim();
+    if(!t){ $('estado').textContent='Escribe algo antes de guardar.'; return; }
+    var d=KANJI[current], list=getLS(DKEY,[]).filter(function(e){return e.k!==d.k;});
+    list.push({k:d.k,q:d.q,t:t,f:hoy.getDate()+' de '+meses[hoy.getMonth()]});
+    $('estado').textContent = setLS(DKEY,list) ? 'Guardado en tu diario.' : 'No se pudo guardar en este navegador.';
+  });
+
+  // ---------- Colección ----------
+  function renderGrid(){
+    $('grid').innerHTML = KANJI.map(function(d,i){
+      return '<button type="button" class="card'+(i===TODAY?' today':'')+'" data-i="'+i+'" aria-label="'+d.k+', '+d.m+'">'
+        + (i===TODAY?'<span class="badge">Hoy</span>':'')
+        + '<span class="ck" lang="ja">'+d.k+'</span><span class="cr">'+d.r+'</span><span class="cm">'+d.m+'</span></button>';
+    }).join('') + '<div class="note">Cada día se suma un kanji nuevo a tu colección.</div>';
+    all('#grid .card').forEach(function(b){ b.addEventListener('click',function(){ showKanji(+b.getAttribute('data-i')); go('hoy'); }); });
+  }
+
+  // ---------- Estaciones ----------
+  function currentSekki(){
+    var m=hoy.getMonth()+1, dd=hoy.getDate(), idx=SEKKI.length-1;
+    for(var i=0;i<SEKKI.length;i++){ var s=SEKKI[i].d; if(m>s[0] || (m===s[0] && dd>=s[1])) idx=i; }
+    return idx;
+  }
+  function fmt(d){ return d[1]+' '+meses[d[0]-1].slice(0,3); }
+  function renderSeasons(){
+    var c=currentSekki(), s=SEKKI[c];
+    $('season-k').textContent=s.k; $('season-m').textContent=s.m;
+    $('sekki-now').innerHTML='<div class="eyebrow">Ahora en Japón · '+SEASON_OF(c)+'</div><div class="sk" lang="ja">'+s.k+'</div><div class="sr">'+s.r+' · '+s.m+'</div><p>'+s.t+'</p>';
+    var html='', last='';
+    var order=[2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,0,1];
+    order.forEach(function(i){ var x=SEKKI[i];
+      var g=SEASON_OF(i);
+      if(g!==last){ if(last) html+='</div>'; html+='<div class="sgroup"><h2 style="margin:0;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--kin);font-weight:500">'+g+'</h2>'; last=g; }
+      html+='<div class="srow'+(i===c?' now':'')+'"><span class="sk" lang="ja">'+x.k+'</span><span class="sm">'+x.m+(i===c?' <span class="now-tag">· ahora</span>':'')+'<span class="muted" style="display:block;font-size:13px">'+x.t+'</span></span><span class="sd">'+fmt(x.d)+'</span></div>';
+    });
+    $('slist').innerHTML=html+'</div>';
+  }
+
+  // ---------- Cielo ----------
+  function renderSky(){
+    var t=hoy.getDay();
+    $('days').innerHTML = DAYS.map(function(d,i){
+      return '<button type="button" class="day'+(i===t?' today':'')+'" data-k="'+d.k+'"><span class="dk" lang="ja">'+d.k+'</span><span><span class="dn">'+d.d+(i===t?' · hoy':'')+'</span><span class="dd" style="display:block">'+d.k+'曜日 '+d.jp+' · '+d.el+'</span></span><span class="dp">'+d.star+'</span></button>';
+    }).join('');
+    all('#days .day').forEach(function(b){ b.addEventListener('click',function(){ openShodo(b.getAttribute('data-k')); }); });
+  }
+
+  // ---------- Construir ----------
+  var sel=[];
+  function renderPieces(){
+    $('pieces').innerHTML = PIECES.map(function(p){ return '<button type="button" class="piece" data-p="'+p+'" lang="ja" aria-label="Pieza '+p+'">'+p+'</button>'; }).join('');
+    all('#pieces .piece').forEach(function(b){ b.addEventListener('click',function(){ pick(b.getAttribute('data-p')); }); });
+    renderFound();
+  }
+  function setSlots(){
+    $('slot1').textContent=sel[0]||''; $('slot1').classList.toggle('filled',!!sel[0]);
+    $('slot2').textContent=sel[1]||''; $('slot2').classList.toggle('filled',!!sel[1]);
+  }
+  function pick(p){
+    if(sel.length===2){ sel=[]; $('slot3').textContent='?'; $('slot3').classList.remove('ok'); $('buildmsg').textContent=''; }
+    sel.push(p); setSlots();
+    if(sel.length<2) return;
+    var r=RECIPES.filter(function(x){ return (x[0]===sel[0]&&x[1]===sel[1])||(x[0]===sel[1]&&x[1]===sel[0]); })[0];
+    if(r){
+      $('slot3').textContent=r[2]; $('slot3').classList.add('ok');
+      $('buildmsg').innerHTML='<b style="font-family:var(--mincho);color:var(--kin);font-size:18px">'+r[2]+' · '+r[3]+'</b><br>'+r[4];
+      var f=getLS(FKEY,[]); if(f.indexOf(r[2])<0){ f.push(r[2]); setLS(FKEY,f); toast('Nuevo kanji descubierto: '+r[2]); }
+      renderFound();
+    } else {
+      $('slot3').textContent='?';
+      $('buildmsg').textContent='Esa combinación no forma un kanji de esta colección. Prueba otra.';
+    }
+  }
+  function renderFound(){
+    var f=getLS(FKEY,[]);
+    $('found-t').textContent='Descubiertos · '+f.length+' de '+RECIPES.length;
+    $('found').innerHTML = RECIPES.map(function(r){ var g=f.indexOf(r[2])>-1; return '<span lang="ja" class="'+(g?'got':'')+'" aria-label="'+(g?r[2]:'Por descubrir')+'">'+(g?r[2]:'?')+'</span>'; }).join('');
+  }
+
+  // ---------- Mi kanji ----------
+  function findWord(q){
+    q=norm(q); if(!q) return null;
+    for(var i=0;i<WORDS.length;i++){ if(WORDS[i].w.indexOf(q)>-1) return WORDS[i]; }
+    for(var j=0;j<WORDS.length;j++){ for(var k=0;k<WORDS[j].w.length;k++){ if(q.length>=4 && WORDS[j].w[k].indexOf(q)===0) return WORDS[j]; } }
+    return false;
+  }
+  function showWord(q){
+    var w=findWord(q), box=$('mk-result');
+    if(w===null){ box.innerHTML=''; return; }
+    if(w===false){ box.innerHTML='<div class="empty" style="margin:0">Esa palabra aún no está en tu diccionario.<br>Prueba con: '+CHIPS.slice(0,5).join(', ')+'…</div>'; return; }
+    var canPractice = w.k.length===1 && STROKES[w.k];
+    box.innerHTML='<div class="paper"><svg class="crack" width="150" height="90" viewBox="0 0 150 90" aria-hidden="true"><path d="M150 14 L118 22 L104 40 L86 44 L70 66" fill="none" stroke="#C9A85A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
+      +'<span class="rk" lang="ja">'+w.k+'</span><span class="rr">'+esc(w.r)+'</span><span style="position:relative;font-family:var(--mincho);font-size:20px;font-weight:700">'+esc(w.m)+'</span>'
+      +'<span class="rn">'+esc(w.n)+'</span>'
+      +'<div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;position:relative">'
+      +'<button type="button" class="cta" id="mk-say" style="background:var(--sumi)">Escuchar</button>'
+      +(canPractice?'<button type="button" class="cta" id="mk-practice">Practicar en Shodō</button>':'')
+      +'</div><span class="warn">Si piensas tatuártelo o regalarlo, confírmalo antes con una persona que sepa japonés.</span></div>';
+    $('mk-say').addEventListener('click',function(){ speak(w.kana); });
+    if(canPractice) $('mk-practice').addEventListener('click',function(){ openShodo(w.k); });
+  }
+  $('mk-chips').innerHTML = CHIPS.map(function(c){ return '<button type="button" class="chip">'+c+'</button>'; }).join('');
+  all('#mk-chips .chip').forEach(function(b){ b.addEventListener('click',function(){ $('mk-input').value=b.textContent; showWord(b.textContent); }); });
+  $('mk-input').addEventListener('input',function(e){ showWord(e.target.value); });
+
+  // ---------- Shodō ----------
+  var SH_LIST = ['間','和','道','縁','心','休','明','日','月','火','水','木','金','土'];
+  var MEAN = {}; KANJI.forEach(function(d){ MEAN[d.k]=[d.r,d.m]; });
+  DAYS.forEach(function(d){ var w=WORDS.filter(function(x){return x.k===d.k;})[0]; MEAN[d.k]=[w?w.r:'', (w?w.m:'')+' · '+d.d.toLowerCase()]; });
+  var shK='間', userStrokes=0, timers=[], guide=true;
+  var canvas=$('canvas'), ctx=canvas.getContext('2d'), board=$('board');
+  var NS='http://www.w3.org/2000/svg';
+
+  $('kpick').innerHTML = SH_LIST.map(function(k){ return '<button type="button" class="kp" data-k="'+k+'" lang="ja">'+k+'</button>'; }).join('');
+  all('#kpick .kp').forEach(function(b){ b.addEventListener('click',function(){ setShodo(b.getAttribute('data-k')); }); });
+
+  function openShodo(k){ setShodo(k); go('shodo'); }
+  function setShodo(k){
+    shK=k; stopAnim(); clearCanvas();
+    all('#kpick .kp').forEach(function(b){ var on=b.getAttribute('data-k')===k; b.classList.toggle('sel',on); if(on) b.scrollIntoView({block:'nearest',inline:'center'}); });
+    var g=$('ghost'); g.innerHTML='';
+    STROKES[k].forEach(function(d){ var p=document.createElementNS(NS,'path'); p.setAttribute('d',d); g.appendChild(p); });
+    $('sh-r').textContent=(MEAN[k]||['',''])[0]; $('sh-m').textContent=(MEAN[k]||['',''])[1];
+    updateCount();
+  }
+  function updateCount(){
+    var total=STROKES[shK].length;
+    $('sh-count').textContent='Trazos '+Math.min(userStrokes,total)+' de '+total;
+  }
+  function stopAnim(){ timers.forEach(clearTimeout); timers=[]; $('anim').innerHTML=''; }
+  $('sh-order').addEventListener('click',function(){
+    stopAnim(); var a=$('anim');
+    STROKES[shK].forEach(function(d,i){
+      var p=document.createElementNS(NS,'path'); p.setAttribute('d',d); a.appendChild(p);
+      var L=p.getTotalLength(); p.style.strokeDasharray=L; p.style.strokeDashoffset=L;
+      var st=p.getPointAtLength(0);
+      var t=document.createElementNS(NS,'text'); t.setAttribute('x',st.x-3.5); t.setAttribute('y',st.y-2); t.setAttribute('font-size','5.5'); t.setAttribute('fill','#B83A22'); t.setAttribute('stroke','none'); t.setAttribute('font-family','sans-serif'); t.setAttribute('font-weight','700'); t.textContent=i+1; t.style.opacity=0; a.appendChild(t);
+      timers.push(setTimeout(function(){ p.style.transition='stroke-dashoffset .55s ease'; p.style.strokeDashoffset=0; t.style.opacity=1; }, 200+i*700));
+    });
+  });
+  $('sh-guide').addEventListener('click',function(){
+    guide=!guide; $('ghost').style.display=guide?'':'none';
+    this.classList.toggle('on',guide); this.setAttribute('aria-pressed',guide);
+  });
+  $('sh-clear').addEventListener('click',function(){ clearCanvas(); stopAnim(); });
+
+  var dpr=1, size=0;
+  function sizeCanvas(){
+    var r=board.getBoundingClientRect(); if(!r.width) return;
+    dpr=window.devicePixelRatio||1; size=r.width;
+    var old=document.createElement('canvas'); old.width=canvas.width; old.height=canvas.height; if(canvas.width) old.getContext('2d').drawImage(canvas,0,0);
+    canvas.width=Math.round(r.width*dpr); canvas.height=Math.round(r.height*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    if(old.width) ctx.drawImage(old,0,0,old.width,old.height,0,0,r.width,r.height);
+  }
+  function clearCanvas(){ ctx.save(); ctx.setTransform(1,0,0,1,0,0); ctx.clearRect(0,0,canvas.width,canvas.height); ctx.restore(); userStrokes=0; updateCount(); }
+  window.addEventListener('resize',sizeCanvas);
+
+  var drawing=false, last=null, lastW=0;
+  function pos(e){ var r=canvas.getBoundingClientRect(); return {x:e.clientX-r.left, y:e.clientY-r.top, t:performance.now()}; }
+  canvas.addEventListener('pointerdown',function(e){
+    e.preventDefault(); canvas.setPointerCapture(e.pointerId);
+    drawing=true; last=pos(e); lastW=size*0.034;
+    ctx.fillStyle='#1A1A1F'; ctx.beginPath(); ctx.arc(last.x,last.y,lastW/2,0,Math.PI*2); ctx.fill();
+  });
+  canvas.addEventListener('pointermove',function(e){
+    if(!drawing) return; e.preventDefault();
+    var p=pos(e), dx=p.x-last.x, dy=p.y-last.y, dist=Math.sqrt(dx*dx+dy*dy);
+    if(dist<1) return;
+    var v=dist/Math.max(p.t-last.t,1), maxW=size*0.05, minW=size*0.012;
+    var target=Math.max(minW, Math.min(maxW, maxW*(1.2-v*0.55)));
+    var w=lastW*0.65+target*0.35;
+    ctx.strokeStyle='#1A1A1F'; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.lineWidth=w;
+    ctx.beginPath(); ctx.moveTo(last.x,last.y); ctx.lineTo(p.x,p.y); ctx.stroke();
+    last=p; lastW=w;
+  });
+  function endStroke(){
+    if(!drawing) return; drawing=false; userStrokes++; updateCount();
+    if(userStrokes===STROKES[shK].length) toast('Completaste los '+userStrokes+' trazos de '+shK+'. Muy bien.');
+  }
+  canvas.addEventListener('pointerup',endStroke);
+  canvas.addEventListener('pointercancel',endStroke);
+
+  // ---------- Diario ----------
+  function renderDiary(){
+    var list=getLS(DKEY,[]);
+    if(!list.length){ $('entries').innerHTML='<div class="empty">Aún no tienes reflexiones.<br>Responde la pregunta del kanji del día y aparecerá aquí.</div>'; return; }
+    $('entries').innerHTML = list.slice().reverse().map(function(e){
+      return '<article class="entry"><span class="ek" lang="ja">'+esc(e.k)+'</span><div><div class="ed">'+esc(e.f)+'</div><div class="eq">'+esc(e.q)+'</div><p class="et">'+esc(e.t)+'</p></div></article>';
+    }).join('');
+  }
+
+  // ---------- Perfil ----------
+  function renderStats(){ $('st-r').textContent=getLS(DKEY,[]).length; $('st-f').textContent=getLS(FKEY,[]).length; }
+  var ritmo=getLS(RKEY,'diario');
+  all('input[name=ritmo]').forEach(function(r){
+    r.checked = r.value===ritmo;
+    r.addEventListener('change',function(){ setLS(RKEY,r.value); toast('Ritmo guardado.'); });
+  });
+
+  // ---------- Inicio ----------
+  showKanji(TODAY); renderGrid(); renderSeasons(); renderSky(); renderPieces(); setShodo('間'); renderStats();
+  var start=(location.hash||'').slice(1);
+  if(PARENT[start]) go(start);
+
+  if('serviceWorker' in navigator && location.protocol!=='file:'){
+    window.addEventListener('load',function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); });
+  }
+})();
+</script>
+</body>
+</html>

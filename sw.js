@@ -1,17 +1,17 @@
 // Yū · melitalove — guarda la app para que funcione sin internet.
 // Cuando cambies index.html, sube el número de versión para que el celular descargue lo nuevo.
-const VERSION = 'yu-v1';
+const VERSION = 'yu-v2';
 const APP = [
   './',
   './index.html',
   './manifest.webmanifest',
-  './icons/icon-192.png',
-  './icons/icon-512.png',
-  './icons/maskable-192.png',
-  './icons/maskable-512.png',
-  './icons/apple-touch-icon.png',
-  './icons/favicon-32.png',
-  './icons/icon.svg'
+  './icon-192.png',
+  './icon-512.png',
+  './maskable-192.png',
+  './maskable-512.png',
+  './apple-touch-icon.png',
+  './favicon-32.png',
+  './icon.svg'
 ];
 
 self.addEventListener('install', (e) => {

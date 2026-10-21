@@ -1,6 +1,6 @@
 // Yū · melitalove — guarda la app para que funcione sin internet.
 // Cuando cambies index.html, sube el número de versión para que el celular descargue lo nuevo.
-const VERSION = 'yu-v2';
+const VERSION = 'yu-v3';
 const APP = [
   './',
   './index.html',

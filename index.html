@@ -5,14 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#141B2E">
 <meta name="description" content="Conocer la cultura japonesa a través de sus kanji. Creado por melitalove.">
-<title>Yū · melitalove</title>
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
-<link rel="icon" href="icon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Yū">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Kanji · melitalove</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
@@ -218,7 +211,7 @@ nav.tabs button[aria-current="page"]{color:var(--kin);font-weight:700}
           <div class="eyebrow" id="hoy-t">Kanji del día</div>
           <div class="sub" id="fecha"></div>
         </div>
-        <span class="muted" style="font-size:13px">Día 12 de racha</span>
+        <span class="muted" style="font-size:13px" id="racha"></span>
       </header>
       <button class="season" type="button" data-go="estaciones">
         <span class="muted" style="font-size:13px">Estación en Japón</span>
@@ -437,8 +430,8 @@ nav.tabs button[aria-current="page"]{color:var(--kin);font-weight:700}
         </div>
       </header>
       <div class="stats">
-        <div class="stat"><b>12</b><span>días de racha</span></div>
-        <div class="stat"><b id="st-k">7</b><span>kanji conocidos</span></div>
+        <div class="stat"><b id="st-s">1</b><span id="st-s-l">día de racha</span></div>
+        <div class="stat"><b id="st-k">1</b><span id="st-k-l">kanji conocido</span></div>
         <div class="stat"><b id="st-r">0</b><span>reflexiones</span></div>
         <div class="stat"><b id="st-f">0</b><span>kanji construidos</span></div>
       </div>
@@ -458,7 +451,7 @@ nav.tabs button[aria-current="page"]{color:var(--kin);font-weight:700}
       </div>
       <div class="sec">
         <h2>Sobre esta app</h2>
-        <p style="margin:0;font-size:15px;line-height:1.65"><b style="font-family:var(--mincho);color:var(--kin);font-size:18px">Yū · 優</b> significa ternura. Una invitación a conocer la cultura japonesa a través de sus kanji, un trazo a la vez.</p>
+        <p style="margin:0;font-size:15px;line-height:1.65">Una invitación a conocer la cultura japonesa a través de sus kanji, un trazo a la vez.</p>
         <p class="credit">Trazos de los kanji: <a href="https://kanjivg.tagaini.net" target="_blank" rel="noopener">KanjiVG</a>, de Ulrich Apel, con licencia CC BY-SA 3.0.</p>
       </div>
     </section>
@@ -647,6 +640,26 @@ nav.tabs button[aria-current="page"]{color:var(--kin);font-weight:700}
   var hoy=new Date();
   $('fecha').textContent = dias[hoy.getDay()]+' '+hoy.getDate()+' de '+meses[hoy.getMonth()];
 
+  // ---------- Progreso real: racha y kanji desbloqueados ----------
+  var PKEY='melitalove-kanji-progreso';
+  function dayKey(d){ return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate(); }
+  function daysBetween(a,b){ var x=a.split('-'), y=b.split('-'); return Math.round((new Date(+y[0],y[1]-1,+y[2]) - new Date(+x[0],x[1]-1,+x[2]))/864e5); }
+  var tk=dayKey(hoy), prog=getLS(PKEY,null);
+  if(!prog || typeof prog!=='object'){ prog={streak:1,last:tk,unlocked:1,lastUnlock:tk}; }
+  else if(prog.last!==tk){
+    var gap=daysBetween(prog.last,tk), since=daysBetween(prog.lastUnlock,tk), rit=getLS(RKEY,'diario');
+    prog.streak = gap===1 ? prog.streak+1 : 1;
+    prog.last = tk;
+    if(prog.unlocked<KANJI.length && ((rit==='diario' && since>=1) || (rit==='semana' && since>=2))){ prog.unlocked++; prog.lastUnlock=tk; }
+  }
+  setLS(PKEY,prog);
+  function pickToday(){
+    if(prog.unlocked<KANJI.length) return prog.unlocked-1;
+    var n=daysBetween('2026-1-1',tk); return ((n%KANJI.length)+KANJI.length)%KANJI.length;
+  }
+  TODAY = pickToday();
+  $('racha').textContent = prog.streak===1 ? 'Día 1 de racha' : 'Día '+prog.streak+' de racha';
+
   // ---------- Toast y voz ----------
   var toastTimer;
   function toast(msg){ var t=$('toast'); t.textContent=msg; t.classList.add('on'); clearTimeout(toastTimer); toastTimer=setTimeout(function(){t.classList.remove('on');},2600); }
@@ -710,12 +723,27 @@ nav.tabs button[aria-current="page"]{color:var(--kin);font-weight:700}
 
   // ---------- Colección ----------
   function renderGrid(){
-    $('grid').innerHTML = KANJI.map(function(d,i){
+    $('grid').innerHTML = KANJI.slice(0,prog.unlocked).map(function(d,i){
       return '<button type="button" class="card'+(i===TODAY?' today':'')+'" data-i="'+i+'" aria-label="'+d.k+', '+d.m+'">'
         + (i===TODAY?'<span class="badge">Hoy</span>':'')
         + '<span class="ck" lang="ja">'+d.k+'</span><span class="cr">'+d.r+'</span><span class="cm">'+d.m+'</span></button>';
-    }).join('') + '<div class="note">Cada día se suma un kanji nuevo a tu colección.</div>';
+    }).join('') + nextNote();
     all('#grid .card').forEach(function(b){ b.addEventListener('click',function(){ showKanji(+b.getAttribute('data-i')); go('hoy'); }); });
+    var nb=$('unlock-next'); if(nb) nb.addEventListener('click',unlockNext);
+  }
+
+  function nextNote(){
+    if(prog.unlocked>=KANJI.length) return '<div class="note">Ya conoces los '+KANJI.length+' kanji de esta versión. Pronto llegarán más.</div>';
+    var rit=getLS(RKEY,'diario');
+    if(rit==='libre') return '<div class="note" style="display:flex;flex-direction:column;gap:12px;align-items:center">Avanzas a tu propio ritmo.<button type="button" class="cta" id="unlock-next">Conocer un kanji nuevo</button></div>';
+    if(rit==='semana') return '<div class="note">En un par de días se sumará un kanji nuevo a tu colección.</div>';
+    return '<div class="note">Mañana se sumará un kanji nuevo a tu colección.</div>';
+  }
+  function unlockNext(){
+    if(prog.unlocked>=KANJI.length) return;
+    prog.unlocked++; prog.lastUnlock=tk; setLS(PKEY,prog);
+    TODAY=pickToday(); showKanji(TODAY); renderGrid(); go('hoy');
+    toast('Nuevo kanji en tu colección: '+KANJI[TODAY].k);
   }
 
   // ---------- Estaciones ----------
@@ -894,21 +922,21 @@ nav.tabs button[aria-current="page"]{color:var(--kin);font-weight:700}
   }
 
   // ---------- Perfil ----------
-  function renderStats(){ $('st-r').textContent=getLS(DKEY,[]).length; $('st-f').textContent=getLS(FKEY,[]).length; }
+  function renderStats(){
+    $('st-s').textContent=prog.streak; $('st-s-l').textContent= prog.streak===1?'día de racha':'días de racha';
+    $('st-k').textContent=prog.unlocked; $('st-k-l').textContent= prog.unlocked===1?'kanji conocido':'kanji conocidos';
+    $('st-r').textContent=getLS(DKEY,[]).length; $('st-f').textContent=getLS(FKEY,[]).length;
+  }
   var ritmo=getLS(RKEY,'diario');
   all('input[name=ritmo]').forEach(function(r){
     r.checked = r.value===ritmo;
-    r.addEventListener('change',function(){ setLS(RKEY,r.value); toast('Ritmo guardado.'); });
+    r.addEventListener('change',function(){ setLS(RKEY,r.value); renderGrid(); toast('Ritmo guardado.'); });
   });
 
   // ---------- Inicio ----------
   showKanji(TODAY); renderGrid(); renderSeasons(); renderSky(); renderPieces(); setShodo('間'); renderStats();
   var start=(location.hash||'').slice(1);
   if(PARENT[start]) go(start);
-
-  if('serviceWorker' in navigator && location.protocol!=='file:'){
-    window.addEventListener('load',function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); });
-  }
 })();
 </script>
 </body>

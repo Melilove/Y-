@@ -5,7 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#141B2E">
 <meta name="description" content="Conocer la cultura japonesa a través de sus kanji. Creado por melitalove.">
-<title>Kanji · melitalove</title>
+<title>Yū · melitalove</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Yū">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
@@ -152,6 +159,47 @@ textarea{resize:vertical}
 .shodo-info .sr{font-family:var(--mincho);font-size:20px;color:var(--kin);font-weight:700}
 .tools{display:flex;gap:8px;flex-wrap:wrap;padding:12px 20px 0}
 
+/* Aprender */
+.lesson{margin:16px 20px 0;padding:20px;border:1px solid var(--line);border-radius:4px}
+.lesson h2{margin:0 0 10px;font-family:var(--mincho);font-size:20px;color:var(--kin);letter-spacing:0;text-transform:none;font-weight:700}
+.lesson p,.lesson li{font-size:15px;line-height:1.65}
+.lesson p{margin:0 0 10px}.lesson p:last-child{margin-bottom:0}
+.lesson ul,.lesson ol{margin:0 0 10px;padding-left:20px}
+.lesson li{margin-bottom:6px}
+.lesson .small{font-size:14px;color:var(--quiet)}
+.ex{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;margin:2px 2px;padding:0 6px;border:1px solid var(--kin);border-radius:4px;background:transparent;color:var(--kinari);font-family:var(--mincho);font-size:24px;font-weight:700;vertical-align:middle}
+.example-line{display:flex;flex-wrap:wrap;gap:2px;justify-content:center;font-family:var(--mincho);font-size:30px;font-weight:700;margin:6px 0 12px;padding:12px;background:var(--kinari);border-radius:4px}
+.ex-k,.c-k{color:var(--shu)} .ex-h{color:var(--sumi)} .ex-t{color:#2F5E8A} .c-h{color:var(--kinari)} .c-t{color:#8FB4DA}
+/* Niveles y resultados */
+.levels{display:flex;gap:8px;padding:4px 20px 8px;overflow-x:auto;scrollbar-width:none}
+.lv{flex:none;min-width:130px;min-height:64px;border:1px solid var(--line);border-radius:4px;background:transparent;color:var(--kinari);text-align:left;padding:8px 12px;display:flex;flex-direction:column;gap:2px}
+.lv b{font-family:var(--mincho);font-size:16px}.lv span{font-size:12px;color:var(--quiet)}.lv i{font-style:normal;font-size:11px;font-weight:700;color:var(--kin);letter-spacing:1px;text-transform:uppercase}
+.lv.sel{border-color:var(--kin);background:rgba(201,168,90,.12)}
+.lv:disabled{opacity:.45;cursor:not-allowed}
+.bm-k{font-family:var(--mincho);color:var(--kin);font-size:18px}
+.levelup{margin-top:12px;padding:14px;border:1.5px solid var(--kin);border-radius:4px;display:flex;flex-direction:column;gap:10px;align-items:center}
+.found button.got{font-family:var(--mincho);font-size:22px;width:44px;height:44px;border:1px solid var(--kin);border-radius:4px;background:transparent;color:var(--kin);display:flex;align-items:center;justify-content:center;padding:0}
+.rm{position:relative;font-family:var(--mincho);font-size:20px;font-weight:700}
+.rbtns{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;position:relative}
+.cta.dark{background:var(--sumi)}
+.readings{position:relative;display:flex;flex-wrap:wrap;gap:16px;justify-content:center;font-size:13px}
+.readings div{display:flex;flex-direction:column;align-items:center;gap:2px}.readings span{color:var(--brown)}.readings b{font-size:17px}
+.kgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.kcell{border:1px solid var(--line);border-radius:4px;background:transparent;color:var(--kinari);padding:8px 4px;display:flex;flex-direction:column;align-items:center;gap:2px;min-height:76px}
+.kcell span{font-family:var(--mincho);font-size:30px;font-weight:700;line-height:1.1}.kcell small{font-size:11px;color:var(--quiet);text-align:center;line-height:1.3;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.feedback{margin:10px 20px 0;min-height:22px;font-size:15px;line-height:1.5}
+.feedback.ok{color:#9FD3A8}.feedback.warn{color:#F0A08C}
+.inline-link{background:none;border:none;padding:0;color:#E4CB8A;text-decoration:underline;font-size:inherit;min-height:24px}
+#sh-any{flex:1}
+.timeline{list-style:none;padding:0;margin:0;border-left:2px solid var(--kin)}
+.timeline li{position:relative;padding:0 0 16px 18px;margin:0}
+.timeline li::before{content:'';position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--kon);border:2px solid var(--kin)}
+.timeline b{display:block;font-family:var(--mincho);font-size:16px;color:var(--kinari)}
+.timeline span{display:block;font-size:14px;line-height:1.6;color:var(--quiet);margin-top:2px}
+.ver{font-family:var(--mincho);font-size:13px;color:var(--quiet);letter-spacing:1px}
+.version-box{display:flex;align-items:center;gap:14px;margin:14px 0 0;padding:12px 14px;border:1px solid var(--line);border-radius:4px}
+.version-box .vk{font-family:var(--mincho);font-size:30px;font-weight:700;color:var(--kin);white-space:nowrap}
+.version-box b{display:block;font-size:15px}.version-box small{display:block;font-size:13px;color:var(--quiet);line-height:1.45;margin-top:2px}
 /* Diario */
 .entries{display:flex;flex-direction:column;gap:12px;padding:8px 20px 0}
 .entry{position:relative;overflow:hidden;background:var(--kinari);color:var(--sumi);border-radius:4px;padding:16px;display:grid;grid-template-columns:56px minmax(0,1fr);gap:12px}
@@ -286,12 +334,137 @@ nav.tabs button[aria-current="page"]{color:var(--kin);font-weight:700}
         </div>
       </header>
       <div class="hub">
+        <button class="hubcard" type="button" data-go="aprender"><span class="hk" lang="ja">学</span><span><span class="hn">Aprender</span><span class="hd" style="display:block">Qué son los kanji y por qué importa el orden de los trazos</span></span><span aria-hidden="true">›</span></button>
         <button class="hubcard" type="button" data-go="coleccion"><span class="hk" lang="ja">集</span><span><span class="hn">Colección</span><span class="hd" style="display:block">Los kanji que ya conociste</span></span><span aria-hidden="true">›</span></button>
         <button class="hubcard" type="button" data-go="estaciones"><span class="hk" lang="ja">季</span><span><span class="hn">Estaciones</span><span class="hd" style="display:block">Las 24 estaciones del calendario japonés</span></span><span aria-hidden="true">›</span></button>
         <button class="hubcard" type="button" data-go="cielo"><span class="hk" lang="ja">空</span><span><span class="hn">Cielo</span><span class="hd" style="display:block">El sol, la luna y los planetas en los días de la semana</span></span><span aria-hidden="true">›</span></button>
         <button class="hubcard" type="button" data-go="construir"><span class="hk" lang="ja">組</span><span><span class="hn">Construir</span><span class="hd" style="display:block">Une piezas y descubre kanji</span></span><span aria-hidden="true">›</span></button>
         <button class="hubcard" type="button" data-go="mikanji"><span class="hk" lang="ja">名</span><span><span class="hn">Mi kanji</span><span class="hd" style="display:block">Encuentra el kanji de una palabra o intención</span></span><span aria-hidden="true">›</span></button>
       </div>
+    </section>
+
+    <!-- ================= APRENDER ================= -->
+    <section class="screen" id="aprender" aria-labelledby="apr-t">
+      <button class="back" type="button" data-go="explorar">‹ Explorar</button>
+      <header class="top" style="padding-top:4px">
+        <div>
+          <div class="eyebrow">Aprender · 学</div>
+          <h1 class="title" id="apr-t">¿Qué son los kanji?</h1>
+        </div>
+      </header>
+      <p class="lead">Una guía corta para entender de dónde vienen y cómo funcionan. Toca cualquier kanji de ejemplo para verlo trazo a trazo en Shodō.</p>
+
+      <article class="lesson">
+        <h2>Ideas dibujadas</h2>
+        <p>Los kanji son caracteres que representan una idea o una palabra, no solo un sonido como nuestras letras. Nacieron en China y Japón los adoptó siglos después.</p>
+        <p>El japonés mezcla tres escrituras en una misma frase:</p>
+        <div class="example-line" lang="ja"><span class="ex-k">私</span><span class="ex-h">は</span><span class="ex-t">コーヒー</span><span class="ex-h">を</span><span class="ex-k">飲</span><span class="ex-h">みます</span></div>
+        <p class="small">“Yo tomo café”. <b class="c-k">Kanji</b> para las ideas (yo, beber), <b class="c-h">hiragana</b> para la gramática y <b class="c-t">katakana</b> para palabras extranjeras como “café”.</p>
+      </article>
+
+      <article class="lesson">
+        <h2>Una historia de más de 3.000 años</h2>
+        <p>La palabra kanji (漢字) significa “caracteres de los Han”, el nombre de una antigua dinastía china. Así viajaron de China a Japón:</p>
+        <ol class="timeline">
+          <li><b>Hacia 1250 a. C. · China</b><span>Los primeros escritos conocidos se tallaban en huesos y caparazones de tortuga para consultar a los oráculos. Muchos eran dibujos simples del sol, la luna, un árbol o una persona.</span></li>
+          <li><b>Año 57 · Primer contacto</b><span>El emperador chino regala un sello de oro a un rey de Japón. Fue hallado en 1784 y es de los objetos con kanji más famosos encontrados en Japón.</span></li>
+          <li><b>Siglos IV y V · Llegan a Japón</b><span>Maestros llegados desde la península de Corea traen libros chinos. Japón aún no tenía escritura propia y empieza a usar los kanji.</span></li>
+          <li><b>Siglo VIII · Japón los adapta</b><span>Se escriben las primeras grandes obras japonesas, como el Kojiki (712) y la antología de poemas Man'yōshū. Muchos kanji se usaban solo por su sonido para escribir palabras japonesas.</span></li>
+          <li><b>Siglo IX · Nacen los kana</b><span>De kanji simplificados nacen el hiragana y el katakana. El hiragana, muy usado por mujeres de la corte, permitió obras como La historia de Genji, escrita hacia el año 1008.</span></li>
+          <li><b>1946 · Se simplifican</b><span>Después de la guerra, Japón simplifica muchos kanji, por ejemplo 國 pasó a escribirse <button type="button" class="ex" data-practice="国">国</button>, y fija una lista oficial de 1.850.</span></li>
+          <li><b>2010 · La lista actual</b><span>La lista oficial de kanji de uso común llega a 2.136, que son los que encuentras en esta app.</span></li>
+        </ol>
+      </article>
+
+      <article class="lesson">
+        <h2>¿Cuántos hay?</h2>
+        <p>Existen decenas de miles, pero en Japón se usan oficialmente <b>2.136 kanji de uso común</b> (常用漢字, <i>jōyō kanji</i>). Con ellos se puede leer un diario. Los niños aprenden 1.026 en la escuela primaria.</p>
+      </article>
+
+      <article class="lesson">
+        <h2>Dos formas de leerlos</h2>
+        <p>Casi todos los kanji tienen dos lecturas:</p>
+        <ul>
+          <li><b>On'yomi</b>: la lectura que viene del chino. Se usa sobre todo en palabras compuestas.</li>
+          <li><b>Kun'yomi</b>: la palabra japonesa original. Se usa cuando el kanji va solo.</li>
+        </ul>
+        <p>Ejemplo: <button type="button" class="ex" data-practice="山">山</button> se lee <i>yama</i> cuando significa “montaña” sola, y <i>san</i> en 富士山, Fujisan.</p>
+      </article>
+
+      <article class="lesson">
+        <h2>Sus piezas: los radicales</h2>
+        <p>Muchos kanji se arman con piezas que se repiten, llamadas radicales. Tradicionalmente se cuentan 214. Conocerlos ayuda a adivinar el sentido de un kanji nuevo.</p>
+        <p>Por ejemplo, 氵 significa agua y aparece en <button type="button" class="ex" data-practice="海">海</button> mar, <button type="button" class="ex" data-practice="池">池</button> estanque y <button type="button" class="ex" data-practice="泳">泳</button> nadar.</p>
+      </article>
+
+      <article class="lesson">
+        <h2>Cómo se forman</h2>
+        <ul>
+          <li><b>Dibujos</b>: <button type="button" class="ex" data-practice="木">木</button> árbol, <button type="button" class="ex" data-practice="日">日</button> sol, <button type="button" class="ex" data-practice="山">山</button> montaña.</li>
+          <li><b>Señales</b>: <button type="button" class="ex" data-practice="上">上</button> arriba y <button type="button" class="ex" data-practice="下">下</button> abajo, marcados respecto de una línea.</li>
+          <li><b>Ideas combinadas</b>: <button type="button" class="ex" data-practice="休">休</button> descansar, una persona junto a un árbol. Es lo que juegas en Construir.</li>
+          <li><b>Sentido y sonido</b>: una pieza da la idea y otra el sonido. Es la forma más común; la gran mayoría de los kanji se hizo así.</li>
+        </ul>
+        <p>Japón también creó sus propios kanji, llamados <i>kokuji</i>, como <button type="button" class="ex" data-practice="畑">畑</button> huerto o <button type="button" class="ex" data-practice="働">働</button> trabajar.</p>
+      </article>
+
+      <article class="lesson" id="orden">
+        <h2>¿Importa el orden de los trazos?</h2>
+        <p><b>Sí, y mucho.</b> No es una regla caprichosa:</p>
+        <ul>
+          <li>El kanji queda <b>equilibrado y legible</b>, con cada parte en su lugar.</li>
+          <li>La mano <b>fluye</b> de un trazo al siguiente. La caligrafía y la escritura rápida nacen de ese orden: si cambias el orden, el kanji escrito rápido se deforma.</li>
+          <li>Ayuda a <b>memorizar</b>: el kanji se vuelve un movimiento, no solo una imagen.</li>
+          <li>Permite <b>contar trazos</b>, que es como se ordenan los diccionarios.</li>
+        </ul>
+        <p>Por eso Shodō revisa tu orden y te avisa cuando un trazo va antes, después o en otra dirección.</p>
+      </article>
+
+      <article class="lesson">
+        <h2>Las reglas básicas del orden</h2>
+        <ol class="rules">
+          <li><b>De arriba hacia abajo.</b> <button type="button" class="ex" data-practice="三">三</button></li>
+          <li><b>De izquierda a derecha.</b> <button type="button" class="ex" data-practice="川">川</button></li>
+          <li><b>La horizontal antes que la vertical</b> cuando se cruzan. <button type="button" class="ex" data-practice="十">十</button></li>
+          <li><b>El centro antes que los lados</b> cuando son pequeños y simétricos. <button type="button" class="ex" data-practice="小">小</button></li>
+          <li><b>Primero el marco y al final se cierra.</b> <button type="button" class="ex" data-practice="日">日</button> <button type="button" class="ex" data-practice="国">国</button></li>
+          <li><b>La línea que atraviesa todo va al final.</b> <button type="button" class="ex" data-practice="中">中</button></li>
+          <li><b>La diagonal hacia la izquierda antes que la de la derecha.</b> <button type="button" class="ex" data-practice="人">人</button> <button type="button" class="ex" data-practice="文">文</button></li>
+          <li><b>Los puntos pequeños suelen ir al final.</b> <button type="button" class="ex" data-practice="犬">犬</button> <button type="button" class="ex" data-practice="玉">玉</button></li>
+        </ol>
+        <p class="small">Hay excepciones famosas: <button type="button" class="ex" data-practice="右">右</button> derecha empieza por la diagonal y <button type="button" class="ex" data-practice="左">左</button> izquierda por la horizontal. Compáralos en Shodō.</p>
+      </article>
+
+      <article class="lesson">
+        <h2>Cómo termina cada trazo</h2>
+        <p>En caligrafía, el final del trazo también importa. Hay tres formas:</p>
+        <ul>
+          <li><b>Tome</b> (止め): el pincel se detiene con firmeza.</li>
+          <li><b>Hane</b> (跳ね): el trazo termina con un pequeño gancho.</li>
+          <li><b>Harai</b> (払い): el trazo se afina como un barrido.</li>
+        </ul>
+        <p>En <button type="button" class="ex" data-practice="永">永</button> (<i>ei</i>, eternidad) aparecen todos los tipos de trazo básicos. Por eso los calígrafos lo practican desde hace siglos.</p>
+      </article>
+
+      <article class="lesson" id="que-es-shodo">
+        <h2>¿Qué es Shodō?</h2>
+        <p><b>Shodō</b> (書道) significa “el camino de la escritura”: es el arte japonés de escribir con pincel y tinta. Llegó desde China junto con los kanji, y en Japón se volvió una práctica de concentración, belleza y calma, muy cercana al zen.</p>
+        <p>Tradicionalmente se usan <b>los cuatro tesoros del escritorio</b>:</p>
+        <ul>
+          <li><b>Fude</b> (筆): el pincel.</li>
+          <li><b>Sumi</b> (墨): la barra de tinta.</li>
+          <li><b>Suzuri</b> (硯): la piedra donde se muele la tinta con agua.</li>
+          <li><b>Washi</b> (和紙): el papel japonés.</li>
+        </ul>
+        <p>Cada trazo se hace una sola vez, sin corregir, por eso importan tanto el orden y la respiración. Hay estilos más formales y otros más libres, desde el trazo claro y separado hasta la escritura cursiva, donde los trazos se unen.</p>
+        <p>En Japón se enseña en la escuela, y cada año, a comienzos de enero, muchas personas practican el <b>kakizome</b> (書き初め), la primera escritura del año, con un kanji o una frase que exprese un deseo.</p>
+        <p class="small">La sección Shodō de esta app es una práctica con el dedo: no reemplaza al pincel, pero te enseña el orden y el ritmo de cada kanji.</p>
+      </article>
+
+      <article class="lesson">
+        <h2>Cuidado con los mitos</h2>
+        <p>Circulan muchas explicaciones bonitas pero falsas. La más famosa dice que <button type="button" class="ex" data-practice="人">人</button> son “dos personas apoyándose”, pero en realidad es el dibujo de una persona de perfil. En esta app, la <b>historia real</b> y la <b>lectura cultural</b> van siempre por separado.</p>
+      </article>
     </section>
 
     <!-- ================= COLECCIÓN ================= -->
@@ -345,7 +518,8 @@ nav.tabs button[aria-current="page"]{color:var(--kin);font-weight:700}
           <h1 class="title" id="con-t">Une dos piezas</h1>
         </div>
       </header>
-      <p class="lead">Muchos kanji nacen de unir piezas más simples. Elige dos y descubre qué forman.</p>
+      <p class="lead">Muchos kanji nacen de unir piezas más simples. Elige dos y descubre qué forman. Al completar un nivel se abre el siguiente.</p>
+      <div class="levels" id="levels" role="group" aria-label="Niveles"></div>
       <div class="slots">
         <div class="slot" id="slot1" aria-label="Primera pieza"></div>
         <span class="op" aria-hidden="true">+</span>
@@ -353,11 +527,12 @@ nav.tabs button[aria-current="page"]{color:var(--kin);font-weight:700}
         <span class="op" aria-hidden="true">=</span>
         <div class="slot res" id="slot3" aria-live="polite">?</div>
       </div>
-      <p class="buildmsg" id="buildmsg" role="status"></p>
+      <div class="buildmsg" id="buildmsg" role="status"></div>
       <div class="pieces" id="pieces"></div>
       <div class="sec">
         <h2 id="found-t">Descubiertos</h2>
         <div class="found" id="found"></div>
+        <p class="lead" style="margin:10px 0 0;font-size:13px">Toca un kanji descubierto para escribirlo en Shodō.</p>
       </div>
     </section>
 
@@ -371,11 +546,16 @@ nav.tabs button[aria-current="page"]{color:var(--kin);font-weight:700}
         </div>
       </header>
       <div class="sec" style="padding-top:8px">
-        <label for="mk-input" class="muted" style="font-size:14px">Escribe una palabra o intención</label>
-        <input type="search" id="mk-input" placeholder="calma, luz, valentía…" autocomplete="off" style="margin-top:8px">
+        <label for="mk-input" class="muted" style="font-size:14px">Escribe una palabra en español o pega un kanji</label>
+        <input type="search" id="mk-input" placeholder="ternura, renacer, luz…" autocomplete="off" style="margin-top:8px">
+        <p class="muted" id="mk-status" style="font-size:13px;margin:8px 0 0">Busca entre los 2.136 kanji de uso común.</p>
         <div class="chips" id="mk-chips"></div>
       </div>
       <div class="result" id="mk-result" aria-live="polite"></div>
+      <div class="sec" id="mk-more-wrap" style="display:none">
+        <h2 id="mk-more-t">Kanji relacionados</h2>
+        <div class="kgrid" id="mk-more"></div>
+      </div>
     </section>
 
     <!-- ================= SHODŌ ================= -->
@@ -386,28 +566,41 @@ nav.tabs button[aria-current="page"]{color:var(--kin);font-weight:700}
           <h1 class="title" id="sho-t">Escribe con tu dedo</h1>
         </div>
       </header>
-      <div class="kpick" id="kpick" role="group" aria-label="Elige un kanji"></div>
+      <div class="sec" style="padding-top:0"><h2 id="week-t" style="margin-bottom:0">Esta semana</h2><p class="muted" style="font-size:13px;margin:4px 0 0">Se renueva cada lunes con un tema nuevo.</p></div>
+      <div class="kpick" id="kpick-week" role="group" aria-label="Kanji de la semana"></div>
+      <div class="sec" style="padding-top:12px"><h2 style="margin-bottom:0">Tu colección y la semana del cielo</h2></div>
+      <div class="kpick" id="kpick-col" role="group" aria-label="Tu colección"></div>
       <div class="board-wrap">
         <div class="board" id="board">
           <svg viewBox="0 0 109 109" aria-hidden="true">
             <line x1="54.5" y1="0" x2="54.5" y2="109" stroke="#C9B89A" stroke-width="0.4" stroke-dasharray="2 2"></line>
             <line x1="0" y1="54.5" x2="109" y2="54.5" stroke="#C9B89A" stroke-width="0.4" stroke-dasharray="2 2"></line>
             <g id="ghost" fill="none" stroke="#1A1A1F" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.13"></g>
+            <g id="hint" fill="none" stroke="#B83A22" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.45"></g>
             <g id="anim" fill="none" stroke="#B83A22" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"></g>
           </svg>
           <canvas id="canvas" aria-label="Lienzo para escribir el kanji"></canvas>
         </div>
       </div>
       <div class="shodo-info">
-        <div><span class="sr" id="sh-r"></span> <span class="muted" id="sh-m" style="font-size:15px"></span></div>
+        <div><span class="sr" id="sh-big" lang="ja"></span> <span class="sr" id="sh-r"></span> <span class="muted" id="sh-m" style="font-size:15px"></span></div>
         <span class="muted" style="font-size:14px;white-space:nowrap" id="sh-count"></span>
       </div>
+      <p class="feedback" id="sh-feedback" role="status"></p>
       <div class="tools">
-        <button class="pill" type="button" id="sh-order">Ver orden de trazos</button>
+        <button class="pill on" type="button" id="sh-mode" aria-pressed="true">Corregir orden</button>
         <button class="pill on" type="button" id="sh-guide" aria-pressed="true">Guía</button>
+        <button class="pill" type="button" id="sh-order">Ver orden</button>
         <button class="pill" type="button" id="sh-clear">Borrar</button>
       </div>
-      <p class="lead" style="margin-top:16px">Los trazos de muestra aparecen en rojo bermellón (朱), el color con que los maestros de caligrafía corrigen a sus alumnos.</p>
+      <div class="sec" style="padding-top:20px">
+        <label for="sh-any" class="muted" style="font-size:14px">Practicar cualquier kanji</label>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <input type="search" id="sh-any" placeholder="Pega o escribe un kanji" autocomplete="off" lang="ja">
+          <button class="pill" type="button" id="sh-any-go">Practicar</button>
+        </div>
+      </div>
+      <p class="lead" style="margin-top:16px">Los trazos de muestra aparecen en rojo bermellón (朱), el color con que los maestros de caligrafía corrigen a sus alumnos. <button type="button" class="inline-link" data-go-anchor="que-es-shodo">¿Qué es Shodō?</button> · <button type="button" class="inline-link" data-go-anchor="orden">¿Por qué importa el orden?</button></p>
     </section>
 
     <!-- ================= DIARIO ================= -->
@@ -451,8 +644,9 @@ nav.tabs button[aria-current="page"]{color:var(--kin);font-weight:700}
       </div>
       <div class="sec">
         <h2>Sobre esta app</h2>
-        <p style="margin:0;font-size:15px;line-height:1.65">Una invitación a conocer la cultura japonesa a través de sus kanji, un trazo a la vez.</p>
-        <p class="credit">Trazos de los kanji: <a href="https://kanjivg.tagaini.net" target="_blank" rel="noopener">KanjiVG</a>, de Ulrich Apel, con licencia CC BY-SA 3.0.</p>
+        <p style="margin:0;font-size:15px;line-height:1.65"><b style="font-family:var(--mincho);color:var(--kin);font-size:18px">Yū · 優</b> significa ternura. Una invitación a conocer la cultura japonesa a través de sus kanji, un trazo a la vez.</p>
+        <p class="version-box"><span class="vk" lang="ja" id="ver-k"></span><span><b id="ver-n"></b><small>En japonés, 第 marca el orden y 版 significa “edición”.</small></span></p>
+        <p class="credit">Trazos de los kanji: <a href="https://kanjivg.tagaini.net" target="_blank" rel="noopener">KanjiVG</a>, de Ulrich Apel, con licencia CC BY-SA 3.0. Significados y lecturas: <a href="https://www.edrdg.org/wiki/index.php/KANJIDIC_Project" target="_blank" rel="noopener">KANJIDIC2</a>, de EDRDG, con licencia CC BY-SA 4.0.</p>
       </div>
     </section>
 
@@ -462,6 +656,7 @@ nav.tabs button[aria-current="page"]{color:var(--kin);font-weight:700}
         <span style="font-size:14px">Creado por <b>melitalove</b></span>
       </div>
       <span class="slogan">Sabiduría antigua para tu presente</span>
+      <span class="ver" id="ver-foot"></span>
     </footer>
   </main>
 
@@ -571,22 +766,6 @@ nav.tabs button[aria-current="page"]{color:var(--kin);font-weight:700}
   ];
   var SEASON_OF = function(i){ return i<2||i>=20 ? 'Invierno' : i<8 ? 'Primavera' : i<14 ? 'Verano' : 'Otoño'; };
 
-  var RECIPES = [
-    ['亻','木','休','descansar','Una persona junto a un árbol: detenerse a descansar.'],
-    ['日','月','明','claridad','El sol y la luna juntos: lo luminoso.'],
-    ['門','日','間','espacio','Luz que entra por una puerta: el espacio entre las cosas.'],
-    ['木','木','林','arboleda','Dos árboles: un bosquecillo.'],
-    ['林','木','森','bosque','Tres árboles: un bosque frondoso.'],
-    ['亻','言','信','confianza','Una persona y su palabra: confiar.'],
-    ['女','子','好','gustar, querer','Mujer y niño juntos: lo que se quiere.'],
-    ['田','力','男','hombre','Campo de cultivo y fuerza: quien trabajaba la tierra.'],
-    ['口','鳥','鳴','cantar (un ave)','Boca y ave: el canto de un pájaro.'],
-    ['刃','心','忍','soportar','Un filo sobre el corazón: aguantar con paciencia.'],
-    ['艹','化','花','flor','Hierba y 化 (cambiar), que también aporta el sonido.'],
-    ['日','生','星','estrella','日 da el sentido de luz y 生 aporta el sonido.']
-  ];
-  var PIECES = ['亻','木','日','月','門','林','言','女','子','田','力','口','鳥','刃','心','艹','化','生'];
-
   var WORDS = [
     {w:['calma','tranquilidad','serenidad','quietud'], k:'静', r:'shizuka', kana:'しずか', m:'Calma, quietud', n:'Une 青 y 争; 青 aporta el sonido. Expresa lo que está en reposo.'},
     {w:['paz'], k:'平和', r:'heiwa', kana:'へいわ', m:'Paz', n:'平 (plano, sereno) + 和 (armonía).'},
@@ -609,7 +788,11 @@ nav.tabs button[aria-current="page"]{color:var(--kin);font-weight:700}
     {w:['claridad','claro'], k:'明', r:'aka(rui)', kana:'あかるい', m:'Luz, claridad', n:'Es uno de los kanji de tu colección.'},
     {w:['vinculo','destino','lazo','conexion'], k:'縁', r:'en', kana:'えん', m:'Vínculo, lazo del destino', n:'Es uno de los kanji de tu colección.'},
     {w:['espacio','silencio'], k:'間', r:'ma', kana:'ま', m:'El espacio entre las cosas', n:'Es uno de los kanji de tu colección.'},
-    {w:['paciencia','resistencia','aguante'], k:'忍', r:'nin · shino(bu)', kana:'しのぶ', m:'Paciencia, soportar', n:'Un filo 刃 sobre el corazón 心.'},
+    {w:['ternura','tierno','tierna','amabilidad','amable','dulzura','suavidad'], k:'優', r:'yasa(shii) · yū', kana:'やさしい', m:'Ternura, amabilidad', n:'Une 亻 (persona) con 憂, que aporta el sonido y significa “preocupación”. Una lectura popular lo ve como alguien que se preocupa por los demás. Es el kanji que da nombre a esta app.'},
+    {w:['renacer','renacimiento','revivir','resurgir','resucitar'], k:'蘇', r:'yomigae(ru) · so', kana:'よみがえる', m:'Renacer, volver a la vida', n:'Lleva 艹 (hierba) arriba, como lo que vuelve a brotar; la parte de abajo aporta el sonido. Se usa en nombres y no está en la lista oficial de uso común.'},
+    {w:['familia'], k:'家族', r:'kazoku', kana:'かぞく', m:'Familia', n:'家 (casa) + 族 (clan, grupo).'},
+    {w:['amistad','amigo','amiga'], k:'友', r:'tomo', kana:'とも', m:'Amistad, amigo', n:'En su forma antigua eran dos manos que se ayudan.'},
+    {w:['paciencia','resistencia','aguante','perseverancia','perseverar','constancia','tenacidad'], k:'忍', r:'nin · shino(bu)', kana:'しのぶ', m:'Perseverancia, paciencia', n:'Un filo 刃 sobre el corazón 心.'},
     {w:['confianza','fe','confiar'], k:'信', r:'shin', kana:'しん', m:'Confianza', n:'Una persona 亻 y su palabra 言.'},
     {w:['belleza','bello','bella','hermoso'], k:'美', r:'bi · utsuku(shii)', kana:'うつくしい', m:'Belleza', n:'Une 羊 (oveja) y 大 (grande).'},
     {w:['fuego'], k:'火', r:'hi', kana:'ひ', m:'Fuego', n:'Pictograma de llamas.'},
@@ -624,7 +807,7 @@ nav.tabs button[aria-current="page"]{color:var(--kin);font-weight:700}
     {w:['oro','dorado','aureo','metal'], k:'金', r:'kin', kana:'きん', m:'Oro, metal', n:'También es el kanji del viernes, día de Venus.'},
     {w:['arbol','madera'], k:'木', r:'ki', kana:'き', m:'Árbol', n:'Pictograma de un árbol con ramas y raíces.'}
   ];
-  var CHIPS = ['calma','luz','valentía','amor','esperanza','gratitud','libertad','belleza'];
+  var CHIPS = ['ternura','renacer','perseverancia','calma','luz','amor','esperanza','libertad'];
 
   var TODAY = 0, current = 0;
   var DKEY='melitalove-kanji-diario', FKEY='melitalove-kanji-construidos', RKEY='melitalove-kanji-ritmo';
@@ -672,7 +855,7 @@ nav.tabs button[aria-current="page"]{color:var(--kin);font-weight:700}
   }
 
   // ---------- Navegación ----------
-  var PARENT={hoy:'hoy',explorar:'explorar',coleccion:'explorar',estaciones:'explorar',cielo:'explorar',construir:'explorar',mikanji:'explorar',shodo:'shodo',diario:'diario',perfil:'perfil'};
+  var PARENT={hoy:'hoy',explorar:'explorar',aprender:'explorar',coleccion:'explorar',estaciones:'explorar',cielo:'explorar',construir:'explorar',mikanji:'explorar',shodo:'shodo',diario:'diario',perfil:'perfil'};
   var moon='<svg class="moon-s" width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="14" fill="#C9A85A"></circle><rect x="0" y="19" width="34" height="5" rx="2.5" fill="#141B2E" opacity="0.55"></rect></svg>';
   all('.screen:not(#hoy) header.top').forEach(function(h){ h.insertAdjacentHTML('beforeend',moon); });
 
@@ -684,7 +867,9 @@ nav.tabs button[aria-current="page"]{color:var(--kin);font-weight:700}
     });
     if(id==='diario') renderDiary();
     if(id==='perfil') renderStats();
-    if(id==='shodo') setTimeout(sizeCanvas,0);
+    if(id==='shodo'){ renderShodoPick(); setTimeout(sizeCanvas,0); }
+    if(id==='mikanji') getDict().catch(function(){});
+    if(id==='construir') renderLevels();
     if(location.hash!=='#'+id) history.replaceState(null,'','#'+id);
     window.scrollTo(0,0);
   }
@@ -776,10 +961,85 @@ nav.tabs button[aria-current="page"]{color:var(--kin);font-weight:700}
     all('#days .day').forEach(function(b){ b.addEventListener('click',function(){ openShodo(b.getAttribute('data-k')); }); });
   }
 
-  // ---------- Construir ----------
-  var sel=[];
+  // ---------- Datos grandes: diccionario y trazos (se cargan una vez y quedan guardados) ----------
+  var DICT=null, dictP=null, strokesP=null;
+  function loadJSON(url){ return fetch(url).then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); }); }
+  function getDict(){
+    if(DICT) return Promise.resolve(DICT);
+    if(!dictP) dictP=loadJSON('kanji-es.json').then(function(d){ DICT=d; return d; }).catch(function(e){ dictP=null; throw e; });
+    return dictP;
+  }
+  function getStrokes(k){
+    if(STROKES[k]) return Promise.resolve(STROKES[k]);
+    if(!strokesP) strokesP=loadJSON('trazos.json').then(function(d){ Object.keys(d).forEach(function(c){ if(!STROKES[c]) STROKES[c]=d[c]; }); return d; }).catch(function(e){ strokesP=null; throw e; });
+    return strokesP.then(function(){ return STROKES[k]||null; });
+  }
+  function cleanKana(r){ return (r||'').replace(/[.\-]/g,''); }
+
+  // ---------- Construir: tres niveles ----------
+  var LEVELS = [
+    {n:'Primeros pasos', r:[
+      ['亻','木','休','descansar','Una persona junto a un árbol: detenerse a descansar.'],
+      ['日','月','明','claridad','El sol y la luna juntos: lo luminoso.'],
+      ['門','日','間','espacio','Luz que entra por una puerta: el espacio entre las cosas.'],
+      ['木','木','林','arboleda','Dos árboles: un bosquecillo.'],
+      ['林','木','森','bosque','Tres árboles: un bosque frondoso.'],
+      ['亻','言','信','confianza','Una persona y su palabra: confiar.'],
+      ['女','子','好','gustar, querer','Mujer y niño juntos: lo que se quiere.'],
+      ['田','力','男','hombre','Campo de cultivo y fuerza: quien trabajaba la tierra.'],
+      ['口','鳥','鳴','cantar (un ave)','Boca y ave: el canto de un pájaro.'],
+      ['刃','心','忍','perseverar','Un filo sobre el corazón: aguantar con firmeza.'],
+      ['艹','化','花','flor','Hierba y 化 (cambiar), que también aporta el sonido.'],
+      ['日','生','星','estrella','日 da el sentido de luz y 生 aporta el sonido.']],
+     p:['亻','木','日','月','門','林','言','女','子','田','力','口','鳥','刃','心','艹','化','生']},
+    {n:'Ideas que se combinan', r:[
+      ['火','火','炎','llamas','Dos fuegos: llamas que crecen.'],
+      ['山','石','岩','roca','Montaña y piedra: una roca grande.'],
+      ['小','大','尖','punta','Pequeño sobre grande: algo que termina en punta.'],
+      ['不','正','歪','torcido','“No” sobre “recto”: lo que está torcido.'],
+      ['日','日','昌','prosperidad','Dos soles: brillo y prosperidad.'],
+      ['田','心','思','pensar','Arriba se escribe como 田, pero en su origen era una cabeza. Cabeza y corazón: pensar.'],
+      ['自','心','息','aliento','自 era el dibujo de una nariz. Nariz y corazón: respirar, el aliento.'],
+      ['亻','二','仁','bondad','Una persona y el número dos: la bondad entre personas.'],
+      ['少','力','劣','inferior','Poca fuerza: más débil, inferior.'],
+      ['門','耳','聞','escuchar','Una oreja junto a la puerta: escuchar. 門 también aporta el sonido.'],
+      ['門','木','閑','calma, tiempo libre','Un árbol en la entrada: tranquilidad, ocio.'],
+      ['白','水','泉','manantial','Agua clara que brota: un manantial.']],
+     p:['火','山','石','小','大','不','正','日','田','心','自','亻','二','少','力','門','耳','木','白','水']},
+    {n:'Hechos en Japón', r:[
+      ['火','田','畑','huerto','Creado en Japón: fuego y campo, la tierra que se quemaba para cultivar.'],
+      ['亻','動','働','trabajar','Creado en Japón: una persona en movimiento, trabajar.'],
+      ['木','神','榊','sakaki','Creado en Japón: el árbol sagrado que se ofrece en los santuarios sintoístas.'],
+      ['几','止','凪','calma del mar','Creado en Japón: el viento se detiene y el mar queda en calma.'],
+      ['辶','入','込','entrar, llenarse','Creado en Japón: avanzar y entrar.'],
+      ['木','卆','枠','marco','Creado en Japón: un marco, como el de madera.'],
+      ['身','美','躾','buenos modales','Creado en Japón: un cuerpo bello, es decir, la buena educación.'],
+      ['魚','弱','鰯','sardina','Creado en Japón: el pez débil, porque muere apenas sale del agua.'],
+      ['口','犬','吠','ladrar','Boca y perro: ladrar.'],
+      ['耳','又','取','tomar','Una mano 又 que toma una oreja: tomar, agarrar.'],
+      ['鳥','山','島','isla','Un ave sobre una montaña en el mar: una isla.'],
+      ['手','目','看','observar','Una mano sobre los ojos: mirar con atención.']],
+     p:['火','田','亻','動','木','神','几','止','辶','入','卆','身','美','魚','弱','口','犬','耳','又','鳥','山','手','目']}
+  ];
+  var TOTAL_RECIPES = LEVELS.reduce(function(a,l){ return a+l.r.length; },0);
+  var sel=[], lvl=0;
+  function found(){ return getLS(FKEY,[]); }
+  function levelDone(i){ var f=found(); return LEVELS[i].r.every(function(x){ return f.indexOf(x[2])>-1; }); }
+  function levelOpen(i){ return i===0 || levelDone(i-1); }
+  function firstOpenLevel(){ for(var i=0;i<LEVELS.length;i++){ if(!levelDone(i)) return i; } return LEVELS.length-1; }
+  function renderLevels(){
+    $('levels').innerHTML = LEVELS.map(function(L,i){
+      var open=levelOpen(i), done=levelDone(i);
+      return '<button type="button" class="lv'+(i===lvl?' sel':'')+(done?' done':'')+'" data-l="'+i+'"'+(open?'':' disabled')+'><b>Nivel '+(i+1)+'</b><span>'+(open?L.n:'Se abre al completar el nivel '+i)+'</span>'+(done?'<i>Completo</i>':'')+'</button>';
+    }).join('');
+    all('#levels .lv').forEach(function(b){ b.addEventListener('click',function(){ setLevel(+b.getAttribute('data-l')); }); });
+  }
+  function setLevel(i){
+    lvl=i; sel=[]; setSlots(); $('slot3').textContent='?'; $('slot3').classList.remove('ok'); $('buildmsg').innerHTML='';
+    renderLevels(); renderPieces();
+  }
   function renderPieces(){
-    $('pieces').innerHTML = PIECES.map(function(p){ return '<button type="button" class="piece" data-p="'+p+'" lang="ja" aria-label="Pieza '+p+'">'+p+'</button>'; }).join('');
+    $('pieces').innerHTML = LEVELS[lvl].p.map(function(p){ return '<button type="button" class="piece" data-p="'+p+'" lang="ja" aria-label="Pieza '+p+'">'+p+'</button>'; }).join('');
     all('#pieces .piece').forEach(function(b){ b.addEventListener('click',function(){ pick(b.getAttribute('data-p')); }); });
     renderFound();
   }
@@ -788,129 +1048,298 @@ nav.tabs button[aria-current="page"]{color:var(--kin);font-weight:700}
     $('slot2').textContent=sel[1]||''; $('slot2').classList.toggle('filled',!!sel[1]);
   }
   function pick(p){
-    if(sel.length===2){ sel=[]; $('slot3').textContent='?'; $('slot3').classList.remove('ok'); $('buildmsg').textContent=''; }
+    if(sel.length===2){ sel=[]; $('slot3').textContent='?'; $('slot3').classList.remove('ok'); $('buildmsg').innerHTML=''; }
     sel.push(p); setSlots();
     if(sel.length<2) return;
-    var r=RECIPES.filter(function(x){ return (x[0]===sel[0]&&x[1]===sel[1])||(x[0]===sel[1]&&x[1]===sel[0]); })[0];
-    if(r){
-      $('slot3').textContent=r[2]; $('slot3').classList.add('ok');
-      $('buildmsg').innerHTML='<b style="font-family:var(--mincho);color:var(--kin);font-size:18px">'+r[2]+' · '+r[3]+'</b><br>'+r[4];
-      var f=getLS(FKEY,[]); if(f.indexOf(r[2])<0){ f.push(r[2]); setLS(FKEY,f); toast('Nuevo kanji descubierto: '+r[2]); }
-      renderFound();
-    } else {
-      $('slot3').textContent='?';
-      $('buildmsg').textContent='Esa combinación no forma un kanji de esta colección. Prueba otra.';
-    }
+    var r=LEVELS[lvl].r.filter(function(x){ return (x[0]===sel[0]&&x[1]===sel[1])||(x[0]===sel[1]&&x[1]===sel[0]); })[0];
+    if(!r){ $('slot3').textContent='?'; $('buildmsg').textContent='Esa combinación no forma un kanji de este nivel. Prueba otra.'; return; }
+    $('slot3').textContent=r[2]; $('slot3').classList.add('ok');
+    var msg='<b class="bm-k">'+r[2]+' · '+r[3]+'</b><br>'+r[4];
+    var f=found(), isNew=f.indexOf(r[2])<0;
+    if(isNew){ f.push(r[2]); setLS(FKEY,f); }
+    if(isNew && levelDone(lvl)){
+      if(lvl<LEVELS.length-1){
+        msg+='<div class="levelup">Completaste el nivel '+(lvl+1)+'. Se abrió el nivel '+(lvl+2)+': '+LEVELS[lvl+1].n+'.<br><button type="button" class="cta" id="go-next">Ir al nivel '+(lvl+2)+'</button></div>';
+      } else {
+        msg+='<div class="levelup">Completaste los tres niveles: descubriste los '+TOTAL_RECIPES+' kanji. Puedes practicarlos todos en Shodō.</div>';
+      }
+    } else if(isNew){ toast('Nuevo kanji descubierto: '+r[2]); }
+    $('buildmsg').innerHTML=msg;
+    var gn=$('go-next'); if(gn) gn.addEventListener('click',function(){ setLevel(lvl+1); });
+    renderLevels(); renderFound();
   }
   function renderFound(){
-    var f=getLS(FKEY,[]);
-    $('found-t').textContent='Descubiertos · '+f.length+' de '+RECIPES.length;
-    $('found').innerHTML = RECIPES.map(function(r){ var g=f.indexOf(r[2])>-1; return '<span lang="ja" class="'+(g?'got':'')+'" aria-label="'+(g?r[2]:'Por descubrir')+'">'+(g?r[2]:'?')+'</span>'; }).join('');
+    var f=found(), L=LEVELS[lvl];
+    var got=L.r.filter(function(r){ return f.indexOf(r[2])>-1; }).length;
+    $('found-t').textContent='Nivel '+(lvl+1)+' · '+got+' de '+L.r.length+'  ·  Total '+f.length+' de '+TOTAL_RECIPES;
+    $('found').innerHTML = L.r.map(function(r){
+      var g=f.indexOf(r[2])>-1;
+      return g ? '<button type="button" class="got" lang="ja" data-k="'+r[2]+'" aria-label="Practicar '+r[2]+'">'+r[2]+'</button>' : '<span aria-label="Por descubrir">?</span>';
+    }).join('');
+    all('#found .got').forEach(function(b){ b.addEventListener('click',function(){ openShodo(b.getAttribute('data-k')); }); });
+    var all3 = LEVELS.every(function(_,i){ return levelDone(i); });
+    if(all3 && !$('reset-build')){
+      $('found').insertAdjacentHTML('afterend','<div class="note" id="reset-wrap" style="margin-top:14px">Completaste los tres niveles. Puedes volver a empezar para jugar de nuevo.<br><button type="button" class="ghost-btn" id="reset-build" style="margin-top:10px">Volver a empezar</button></div>');
+      $('reset-build').addEventListener('click',function(){ setLS(FKEY,[]); var w=$('reset-wrap'); if(w) w.remove(); setLevel(0); toast('Construir comenzó de nuevo.'); });
+    }
   }
 
-  // ---------- Mi kanji ----------
+  // ---------- Mi kanji: palabras curadas + diccionario de 2.136 kanji ----------
   function findWord(q){
-    q=norm(q); if(!q) return null;
+    var raw=q.trim(); q=norm(q); if(!q) return null;
+    for(var z=0;z<WORDS.length;z++){ if(WORDS[z].k===raw) return WORDS[z]; }
     for(var i=0;i<WORDS.length;i++){ if(WORDS[i].w.indexOf(q)>-1) return WORDS[i]; }
     for(var j=0;j<WORDS.length;j++){ for(var k=0;k<WORDS[j].w.length;k++){ if(q.length>=4 && WORDS[j].w[k].indexOf(q)===0) return WORDS[j]; } }
     return false;
   }
-  function showWord(q){
-    var w=findWord(q), box=$('mk-result');
-    if(w===null){ box.innerHTML=''; return; }
-    if(w===false){ box.innerHTML='<div class="empty" style="margin:0">Esa palabra aún no está en tu diccionario.<br>Prueba con: '+CHIPS.slice(0,5).join(', ')+'…</div>'; return; }
-    var canPractice = w.k.length===1 && STROKES[w.k];
-    box.innerHTML='<div class="paper"><svg class="crack" width="150" height="90" viewBox="0 0 150 90" aria-hidden="true"><path d="M150 14 L118 22 L104 40 L86 44 L70 66" fill="none" stroke="#C9A85A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>'
-      +'<span class="rk" lang="ja">'+w.k+'</span><span class="rr">'+esc(w.r)+'</span><span style="position:relative;font-family:var(--mincho);font-size:20px;font-weight:700">'+esc(w.m)+'</span>'
+  function searchDict(q){
+    var raw=q.trim(), n=norm(q); if(!n) return [];
+    var direct=Array.from(raw).filter(function(c){ return DICT[c]; });
+    if(direct.length) return direct.filter(function(c,i,a){ return a.indexOf(c)===i; });
+    function run(term){
+      var res=[];
+      Object.keys(DICT).forEach(function(c){
+        var best=99;
+        DICT[c].es.forEach(function(m,mi){
+          var mn=norm(m);
+          if(mn===term) best=Math.min(best, mi);
+          else if((' '+mn.replace(/[^a-z0-9]+/g,' ')+' ').indexOf(' '+term+' ')>-1) best=Math.min(best, 10+mi);
+        });
+        if(best<99) res.push([best, DICT[c].f||3000, c]);
+      });
+      res.sort(function(a,b){ return a[0]-b[0] || a[1]-b[1]; });
+      return res.map(function(x){ return x[2]; });
+    }
+    var r=run(n);
+    if(!r.length && n.length>3 && /es$/.test(n)) r=run(n.slice(0,-2));
+    if(!r.length && n.length>3 && /s$/.test(n)) r=run(n.slice(0,-1));
+    if(!r.length && /a$/.test(n)) r=run(n.slice(0,-1)+'o');
+    return r.slice(0,30);
+  }
+  function crack(){ return '<svg class="crack" width="150" height="90" viewBox="0 0 150 90" aria-hidden="true"><path d="M150 14 L118 22 L104 40 L86 44 L70 66" fill="none" stroke="#C9A85A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>'; }
+  function curatedCard(w){
+    var canPractice = w.k.length===1;
+    $('mk-result').innerHTML='<div class="paper">'+crack()
+      +'<span class="rk" lang="ja">'+w.k+'</span><span class="rr">'+esc(w.r)+'</span><span class="rm">'+esc(w.m)+'</span>'
       +'<span class="rn">'+esc(w.n)+'</span>'
-      +'<div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;position:relative">'
-      +'<button type="button" class="cta" id="mk-say" style="background:var(--sumi)">Escuchar</button>'
+      +'<div class="rbtns"><button type="button" class="cta dark" id="mk-say">Escuchar</button>'
       +(canPractice?'<button type="button" class="cta" id="mk-practice">Practicar en Shodō</button>':'')
       +'</div><span class="warn">Si piensas tatuártelo o regalarlo, confírmalo antes con una persona que sepa japonés.</span></div>';
     $('mk-say').addEventListener('click',function(){ speak(w.kana); });
     if(canPractice) $('mk-practice').addEventListener('click',function(){ openShodo(w.k); });
   }
+  function dictCard(c){
+    var d=DICT[c]; if(!d) return;
+    var mean = d.es.length ? d.es.slice(0,5).join(', ') : d.en.join(', ')+' (en inglés)';
+    var kun=d.kun.map(function(x){ return esc(x); }).join(' · '), on=d.on.map(esc).join(' · ');
+    $('mk-result').innerHTML='<div class="paper">'+crack()
+      +'<span class="rk" lang="ja">'+c+'</span><span class="rm">'+esc(mean)+'</span>'
+      +'<div class="readings">'+(kun?'<div><span>Lectura japonesa</span><b lang="ja">'+kun+'</b></div>':'')+(on?'<div><span>Lectura china</span><b lang="ja">'+on+'</b></div>':'')+'<div><span>Trazos</span><b>'+d.s+'</b></div></div>'
+      +'<div class="rbtns"><button type="button" class="cta dark" id="mk-say">Escuchar</button><button type="button" class="cta" id="mk-practice">Practicar en Shodō</button></div>'
+      +'<span class="warn">Significados del diccionario KANJIDIC. Si piensas tatuártelo o regalarlo, confírmalo antes con una persona que sepa japonés.</span></div>';
+    $('mk-say').addEventListener('click',function(){ speak(cleanKana(d.kun[0]||d.on[0]||c)); });
+    $('mk-practice').addEventListener('click',function(){ openShodo(c); });
+  }
+  function moreGrid(list, title){
+    var wrap=$('mk-more-wrap');
+    if(!list.length){ wrap.style.display='none'; return; }
+    wrap.style.display=''; $('mk-more-t').textContent=title;
+    $('mk-more').innerHTML=list.map(function(c){ var d=DICT[c]; var m=d.es[0]||d.en[0]||''; return '<button type="button" class="kcell" data-k="'+c+'"><span lang="ja">'+c+'</span><small>'+esc(m)+'</small></button>'; }).join('');
+    all('#mk-more .kcell').forEach(function(b){ b.addEventListener('click',function(){ dictCard(b.getAttribute('data-k')); window.scrollTo({top:$('mk-result').offsetTop-20,behavior:'smooth'}); }); });
+  }
+  var mkTimer;
+  function showWord(q){
+    var w=findWord(q), box=$('mk-result');
+    if(w===null){ box.innerHTML=''; $('mk-more-wrap').style.display='none'; return; }
+    if(w) curatedCard(w); else box.innerHTML='';
+    getDict().then(function(){
+      if($('mk-input').value!==q) return;
+      var list=searchDict(q);
+      if(w){ moreGrid(list.filter(function(c){ return w.k.indexOf(c)<0; }), 'Otros kanji relacionados'); return; }
+      if(!list.length){ box.innerHTML='<div class="empty" style="margin:0">No encontré un kanji para “'+esc(q)+'”.<br>Prueba con otra palabra, en singular.</div>'; moreGrid([],''); return; }
+      dictCard(list[0]);
+      moreGrid(list.slice(1), list.length>1 ? 'Otros kanji con este significado' : '');
+    }).catch(function(){ if(!w) box.innerHTML='<div class="empty" style="margin:0">Necesitas internet la primera vez para cargar el diccionario.</div>'; });
+  }
   $('mk-chips').innerHTML = CHIPS.map(function(c){ return '<button type="button" class="chip">'+c+'</button>'; }).join('');
   all('#mk-chips .chip').forEach(function(b){ b.addEventListener('click',function(){ $('mk-input').value=b.textContent; showWord(b.textContent); }); });
-  $('mk-input').addEventListener('input',function(e){ showWord(e.target.value); });
+  $('mk-input').addEventListener('input',function(e){ clearTimeout(mkTimer); var v=e.target.value; mkTimer=setTimeout(function(){ showWord(v); },250); });
 
   // ---------- Shodō ----------
-  var SH_LIST = ['間','和','道','縁','心','休','明','日','月','火','水','木','金','土'];
-  var MEAN = {}; KANJI.forEach(function(d){ MEAN[d.k]=[d.r,d.m]; });
-  DAYS.forEach(function(d){ var w=WORDS.filter(function(x){return x.k===d.k;})[0]; MEAN[d.k]=[w?w.r:'', (w?w.m:'')+' · '+d.d.toLowerCase()]; });
-  var shK='間', userStrokes=0, timers=[], guide=true;
+  var WEEK_THEMES = [
+    ['Naturaleza','山川木林森花草雨雪風石'],
+    ['Cuerpo','目耳口手足心頭顔体首'],
+    ['Números','一二三四五六七八九十百千'],
+    ['Colores','赤青白黒黄緑紫金銀色'],
+    ['Familia','父母兄姉弟妹家子親友'],
+    ['Tiempo','年月日時分週朝昼夜今'],
+    ['Emociones','愛楽喜怒悲恋夢笑泣幸'],
+    ['Agua','水海川池泉波氷涙湖洋'],
+    ['Camino','道歩走止行来出入門橋'],
+    ['Cielo','天空星雲光晴虹宇宙陽'],
+    ['Tus palabras','優忍蘇慈和静光幸愛心']
+  ];
+  function weekIndex(){ var start=new Date(2026,0,5), d=new Date(hoy.getFullYear(),hoy.getMonth(),hoy.getDate()); return Math.floor((d-start)/(7*864e5)); }
+  var WEEK = WEEK_THEMES[((weekIndex()%WEEK_THEMES.length)+WEEK_THEMES.length)%WEEK_THEMES.length];
+  var SH={k:'', exp:[], user:[], idx:0, errors:0, guided:true, guide:true, timers:[]};
   var canvas=$('canvas'), ctx=canvas.getContext('2d'), board=$('board');
   var NS='http://www.w3.org/2000/svg';
 
-  $('kpick').innerHTML = SH_LIST.map(function(k){ return '<button type="button" class="kp" data-k="'+k+'" lang="ja">'+k+'</button>'; }).join('');
-  all('#kpick .kp').forEach(function(b){ b.addEventListener('click',function(){ setShodo(b.getAttribute('data-k')); }); });
+  function chipRow(id, list){
+    var el=$(id);
+    el.innerHTML = list.map(function(k){ return '<button type="button" class="kp" data-k="'+k+'" lang="ja">'+k+'</button>'; }).join('');
+    all('#'+id+' .kp').forEach(function(b){ b.addEventListener('click',function(){ setShodo(b.getAttribute('data-k')); }); });
+  }
+  function renderShodoPick(){
+    $('week-t').textContent='Esta semana · '+WEEK[0];
+    chipRow('kpick-week', Array.from(WEEK[1]));
+    var col=KANJI.slice(0,prog.unlocked).map(function(d){ return d.k; }).concat(DAYS.map(function(d){ return d.k; }));
+    chipRow('kpick-col', col.filter(function(c,i,a){ return a.indexOf(c)===i; }));
+    markChips();
+  }
+  function markChips(){ all('.kp').forEach(function(b){ var on=b.getAttribute('data-k')===SH.k; b.classList.toggle('sel',on); if(on && $('shodo').classList.contains('on')) b.scrollIntoView({block:'nearest',inline:'center'}); }); }
 
-  function openShodo(k){ setShodo(k); go('shodo'); }
+  function openShodo(k){ go('shodo'); return setShodo(k); }
+  function meaningOf(k){
+    var c=KANJI.filter(function(d){ return d.k===k; })[0];
+    if(c) return [c.r, c.m];
+    var w=WORDS.filter(function(x){ return x.k===k; })[0];
+    if(w) return [w.r, w.m];
+    if(DICT && DICT[k]){ var d=DICT[k]; return [cleanKana(d.kun[0]||d.on[0]||''), (d.es.slice(0,2).join(', ')||d.en.slice(0,2).join(', '))]; }
+    return ['',''];
+  }
   function setShodo(k){
-    shK=k; stopAnim(); clearCanvas();
-    all('#kpick .kp').forEach(function(b){ var on=b.getAttribute('data-k')===k; b.classList.toggle('sel',on); if(on) b.scrollIntoView({block:'nearest',inline:'center'}); });
-    var g=$('ghost'); g.innerHTML='';
-    STROKES[k].forEach(function(d){ var p=document.createElementNS(NS,'path'); p.setAttribute('d',d); g.appendChild(p); });
-    $('sh-r').textContent=(MEAN[k]||['',''])[0]; $('sh-m').textContent=(MEAN[k]||['',''])[1];
-    updateCount();
+    SH.k=k; stopAnim(); clearUser(); markChips();
+    $('sh-big').textContent=k; $('sh-r').textContent=''; $('sh-m').textContent='Cargando…'; $('sh-count').textContent=''; $('ghost').innerHTML=''; $('hint').innerHTML='';
+    var fill=function(){ var mm=meaningOf(k); $('sh-r').textContent=mm[0]; $('sh-m').textContent=mm[1]; };
+    getDict().then(fill).catch(fill);
+    return getStrokes(k).then(function(st){
+      if(SH.k!==k) return;
+      if(!st){ $('sh-m').textContent=''; setFeedback('Ese kanji todavía no tiene trazos disponibles.','warn'); return; }
+      var g=$('ghost'); g.innerHTML=''; SH.exp=[];
+      st.forEach(function(d){
+        var p=document.createElementNS(NS,'path'); p.setAttribute('d',d); g.appendChild(p);
+        var L=p.getTotalLength(), a=p.getPointAtLength(0), m=p.getPointAtLength(L/2), b=p.getPointAtLength(L);
+        SH.exp.push({d:d, len:L, s:{x:a.x,y:a.y}, m:{x:m.x,y:m.y}, e:{x:b.x,y:b.y}});
+      });
+      fill(); updateCount(); showHint();
+      setFeedback(SH.guided ? 'Empieza por el trazo 1, que aparece en rojo.' : 'Modo libre: escribe sin correcciones.','');
+    }).catch(function(){ if(SH.k===k){ $('sh-m').textContent=''; setFeedback('Necesitas internet la primera vez para cargar este kanji.','warn'); } });
   }
-  function updateCount(){
-    var total=STROKES[shK].length;
-    $('sh-count').textContent='Trazos '+Math.min(userStrokes,total)+' de '+total;
+  function setFeedback(t,cls){ var f=$('sh-feedback'); f.textContent=t; f.className='feedback'+(cls?' '+cls:''); }
+  function updateCount(){ var total=SH.exp.length; $('sh-count').textContent= total ? 'Trazos '+Math.min(SH.user.length,total)+' de '+total : ''; }
+  function showHint(){
+    var h=$('hint'); h.innerHTML='';
+    if(!SH.guided || SH.idx>=SH.exp.length) return;
+    var p=document.createElementNS(NS,'path'); p.setAttribute('d',SH.exp[SH.idx].d); h.appendChild(p);
+    var s=SH.exp[SH.idx].s, c=document.createElementNS(NS,'circle'); c.setAttribute('cx',s.x); c.setAttribute('cy',s.y); c.setAttribute('r','2.6'); c.setAttribute('fill','#B83A22'); c.setAttribute('stroke','none'); h.appendChild(c);
   }
-  function stopAnim(){ timers.forEach(clearTimeout); timers=[]; $('anim').innerHTML=''; }
-  $('sh-order').addEventListener('click',function(){
+  function stopAnim(){ SH.timers.forEach(clearTimeout); SH.timers=[]; $('anim').innerHTML=''; }
+  function animate(from,to,speed){
     stopAnim(); var a=$('anim');
-    STROKES[shK].forEach(function(d,i){
-      var p=document.createElementNS(NS,'path'); p.setAttribute('d',d); a.appendChild(p);
-      var L=p.getTotalLength(); p.style.strokeDasharray=L; p.style.strokeDashoffset=L;
-      var st=p.getPointAtLength(0);
-      var t=document.createElementNS(NS,'text'); t.setAttribute('x',st.x-3.5); t.setAttribute('y',st.y-2); t.setAttribute('font-size','5.5'); t.setAttribute('fill','#B83A22'); t.setAttribute('stroke','none'); t.setAttribute('font-family','sans-serif'); t.setAttribute('font-weight','700'); t.textContent=i+1; t.style.opacity=0; a.appendChild(t);
-      timers.push(setTimeout(function(){ p.style.transition='stroke-dashoffset .55s ease'; p.style.strokeDashoffset=0; t.style.opacity=1; }, 200+i*700));
+    SH.exp.slice(from,to).forEach(function(e,j){
+      var i=from+j;
+      var p=document.createElementNS(NS,'path'); p.setAttribute('d',e.d); a.appendChild(p);
+      p.style.strokeDasharray=e.len; p.style.strokeDashoffset=e.len;
+      var t=document.createElementNS(NS,'text'); t.setAttribute('x',e.s.x-3.5); t.setAttribute('y',e.s.y-2); t.setAttribute('font-size','5.5'); t.setAttribute('fill','#B83A22'); t.setAttribute('stroke','none'); t.setAttribute('font-family','sans-serif'); t.setAttribute('font-weight','700'); t.textContent=i+1; t.style.opacity=0; a.appendChild(t);
+      SH.timers.push(setTimeout(function(){ p.style.transition='stroke-dashoffset '+(speed/1000*0.8)+'s ease'; p.style.strokeDashoffset=0; t.style.opacity=1; }, 150+j*speed));
     });
-  });
+  }
+  $('sh-order').addEventListener('click',function(){ animate(0,SH.exp.length,700); });
   $('sh-guide').addEventListener('click',function(){
-    guide=!guide; $('ghost').style.display=guide?'':'none';
-    this.classList.toggle('on',guide); this.setAttribute('aria-pressed',guide);
+    SH.guide=!SH.guide; $('ghost').setAttribute('opacity', SH.guide?'0.13':'0');
+    this.classList.toggle('on',SH.guide); this.setAttribute('aria-pressed',SH.guide);
   });
-  $('sh-clear').addEventListener('click',function(){ clearCanvas(); stopAnim(); });
+  $('sh-mode').addEventListener('click',function(){
+    SH.guided=!SH.guided; this.classList.toggle('on',SH.guided); this.setAttribute('aria-pressed',SH.guided);
+    clearUser(); stopAnim(); showHint();
+    setFeedback(SH.guided ? 'Corrección activada: empieza por el trazo 1.' : 'Modo libre: escribe sin correcciones.','');
+  });
+  $('sh-clear').addEventListener('click',function(){ clearUser(); stopAnim(); showHint(); setFeedback(SH.guided?'Empieza por el trazo 1.':'',''); });
+  $('sh-any-go').addEventListener('click',practiceAny);
+  $('sh-any').addEventListener('keydown',function(e){ if(e.key==='Enter') practiceAny(); });
+  function practiceAny(){
+    var c=Array.from($('sh-any').value.trim()).filter(function(ch){ return /[㐀-鿿豈-﫿]/.test(ch); })[0];
+    if(!c){ toast('Escribe o pega un kanji.'); return; }
+    setShodo(c); window.scrollTo({top:board.offsetTop-80,behavior:'smooth'});
+  }
 
+  // Lienzo
   var dpr=1, size=0;
   function sizeCanvas(){
     var r=board.getBoundingClientRect(); if(!r.width) return;
     dpr=window.devicePixelRatio||1; size=r.width;
-    var old=document.createElement('canvas'); old.width=canvas.width; old.height=canvas.height; if(canvas.width) old.getContext('2d').drawImage(canvas,0,0);
     canvas.width=Math.round(r.width*dpr); canvas.height=Math.round(r.height*dpr);
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-    if(old.width) ctx.drawImage(old,0,0,old.width,old.height,0,0,r.width,r.height);
+    ctx.setTransform(dpr,0,0,dpr,0,0); redraw();
   }
-  function clearCanvas(){ ctx.save(); ctx.setTransform(1,0,0,1,0,0); ctx.clearRect(0,0,canvas.width,canvas.height); ctx.restore(); userStrokes=0; updateCount(); }
   window.addEventListener('resize',sizeCanvas);
+  function clearCanvas(){ ctx.save(); ctx.setTransform(1,0,0,1,0,0); ctx.clearRect(0,0,canvas.width,canvas.height); ctx.restore(); }
+  function clearUser(){ SH.user=[]; SH.idx=0; SH.errors=0; cur=null; clearCanvas(); updateCount(); }
+  function drawStroke(st){
+    ctx.strokeStyle='#1A1A1F'; ctx.fillStyle='#1A1A1F'; ctx.lineCap='round'; ctx.lineJoin='round';
+    var p0=st[0]; ctx.beginPath(); ctx.arc(p0.x*size,p0.y*size,p0.w*size/2,0,Math.PI*2); ctx.fill();
+    for(var i=1;i<st.length;i++){ var a=st[i-1], b=st[i]; ctx.lineWidth=b.w*size; ctx.beginPath(); ctx.moveTo(a.x*size,a.y*size); ctx.lineTo(b.x*size,b.y*size); ctx.stroke(); }
+  }
+  function redraw(){ clearCanvas(); SH.user.forEach(drawStroke); if(cur) drawStroke(cur); }
 
-  var drawing=false, last=null, lastW=0;
+  var drawing=false, cur=null, last=null, lastW=0;
   function pos(e){ var r=canvas.getBoundingClientRect(); return {x:e.clientX-r.left, y:e.clientY-r.top, t:performance.now()}; }
   canvas.addEventListener('pointerdown',function(e){
-    e.preventDefault(); canvas.setPointerCapture(e.pointerId);
+    if(!SH.exp.length) return;
+    e.preventDefault(); canvas.setPointerCapture(e.pointerId); stopAnim();
     drawing=true; last=pos(e); lastW=size*0.034;
-    ctx.fillStyle='#1A1A1F'; ctx.beginPath(); ctx.arc(last.x,last.y,lastW/2,0,Math.PI*2); ctx.fill();
+    cur=[{x:last.x/size, y:last.y/size, w:lastW/size}]; drawStroke(cur);
   });
   canvas.addEventListener('pointermove',function(e){
     if(!drawing) return; e.preventDefault();
     var p=pos(e), dx=p.x-last.x, dy=p.y-last.y, dist=Math.sqrt(dx*dx+dy*dy);
-    if(dist<1) return;
+    if(dist<1.5) return;
     var v=dist/Math.max(p.t-last.t,1), maxW=size*0.05, minW=size*0.012;
     var target=Math.max(minW, Math.min(maxW, maxW*(1.2-v*0.55)));
     var w=lastW*0.65+target*0.35;
     ctx.strokeStyle='#1A1A1F'; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.lineWidth=w;
     ctx.beginPath(); ctx.moveTo(last.x,last.y); ctx.lineTo(p.x,p.y); ctx.stroke();
-    last=p; lastW=w;
+    cur.push({x:p.x/size, y:p.y/size, w:w/size}); last=p; lastW=w;
   });
+  function d2(a,b){ var x=a.x-b.x, y=a.y-b.y; return Math.sqrt(x*x+y*y); }
+  function shapeOf(st){
+    var pts=st.map(function(p){ return {x:p.x*109, y:p.y*109}; });
+    var acc=[0]; for(var i=1;i<pts.length;i++) acc.push(acc[i-1]+d2(pts[i-1],pts[i]));
+    var half=acc[acc.length-1]/2, mi=0; while(mi<acc.length-1 && acc[mi]<half) mi++;
+    return {s:pts[0], m:pts[mi], e:pts[pts.length-1], len:acc[acc.length-1]};
+  }
+  function fits(u,e){ var thr=Math.max(14, e.len*0.38); return d2(u.s,e.s)+d2(u.m,e.m)+d2(u.e,e.e) <= thr*3; }
+  function fitsRev(u,e){ var thr=Math.max(14, e.len*0.38); return e.len>14 && d2(u.s,e.e)+d2(u.m,e.m)+d2(u.e,e.s) <= thr*3; }
   function endStroke(){
-    if(!drawing) return; drawing=false; userStrokes++; updateCount();
-    if(userStrokes===STROKES[shK].length) toast('Completaste los '+userStrokes+' trazos de '+shK+'. Muy bien.');
+    if(!drawing) return; drawing=false;
+    var st=cur; cur=null;
+    if(!SH.guided){
+      SH.user.push(st); updateCount();
+      if(SH.user.length===SH.exp.length) toast('Completaste los '+SH.exp.length+' trazos de '+SH.k+'.');
+      return;
+    }
+    if(SH.idx>=SH.exp.length){ redraw(); return; }
+    var u=shapeOf(st), n=SH.idx+1, e=SH.exp[SH.idx];
+    if(fits(u,e)){
+      SH.user.push(st); SH.idx++; updateCount(); showHint();
+      if(SH.idx===SH.exp.length){
+        setFeedback(SH.errors===0 ? 'Completaste '+SH.k+' con el orden correcto. Muy bien.' : 'Completaste '+SH.k+' con '+SH.errors+(SH.errors===1?' corrección':' correcciones')+'. Inténtalo otra vez para hacerlo sin ninguna.','ok');
+      } else setFeedback('Bien. Ahora el trazo '+(SH.idx+1)+' de '+SH.exp.length+'.','ok');
+      return;
+    }
+    SH.errors++; redraw();
+    var msg;
+    if(fitsRev(u,e)) msg='Casi: el trazo '+n+' va en la otra dirección. Empieza en el punto rojo.';
+    else {
+      var j=-1; for(var k=SH.idx+1;k<SH.exp.length;k++){ if(fits(u,SH.exp[k])){ j=k; break; } }
+      msg = j>-1 ? 'Ese es el trazo '+(j+1)+'. Antes va el trazo '+n+', el que está en rojo.' : 'Ese trazo no coincide. Sigue el trazo '+n+', en rojo, desde el punto.';
+    }
+    setFeedback(msg,'warn'); animate(SH.idx,SH.idx+1,500);
   }
   canvas.addEventListener('pointerup',endStroke);
   canvas.addEventListener('pointercancel',endStroke);
+  all('[data-practice]').forEach(function(b){ b.addEventListener('click',function(){ openShodo(b.getAttribute('data-practice')).then(function(){ setTimeout(function(){ animate(0,SH.exp.length,650); },250); }); }); });
+  all('[data-go-anchor]').forEach(function(b){ b.addEventListener('click',function(){ go('aprender'); var t=$(b.getAttribute('data-go-anchor')); if(t) setTimeout(function(){ t.scrollIntoView({behavior:'smooth'}); },50); }); });
 
   // ---------- Diario ----------
   function renderDiary(){
@@ -933,10 +1362,27 @@ nav.tabs button[aria-current="page"]{color:var(--kin);font-weight:700}
     r.addEventListener('change',function(){ setLS(RKEY,r.value); renderGrid(); toast('Ritmo guardado.'); });
   });
 
+  // ---------- Versión ----------
+  var APP_VERSION = 6; // súbelo junto con VERSION en sw.js
+  function kanjiNum(n){
+    var d=['','一','二','三','四','五','六','七','八','九'];
+    if(n<10) return d[n];
+    var tens=Math.floor(n/10), u=n%10;
+    return (tens>1?d[tens]:'')+'十'+d[u];
+  }
+  var VK='第'+kanjiNum(APP_VERSION)+'版';
+  $('ver-k').textContent=VK; $('ver-n').textContent='Versión '+APP_VERSION;
+  $('ver-foot').textContent=VK+' · versión '+APP_VERSION;
+
   // ---------- Inicio ----------
-  showKanji(TODAY); renderGrid(); renderSeasons(); renderSky(); renderPieces(); setShodo('間'); renderStats();
+  lvl=firstOpenLevel();
+  showKanji(TODAY); renderGrid(); renderSeasons(); renderSky(); renderLevels(); renderPieces(); renderShodoPick(); setShodo(KANJI[TODAY].k); renderStats();
   var start=(location.hash||'').slice(1);
   if(PARENT[start]) go(start);
+
+  if('serviceWorker' in navigator && location.protocol!=='file:'){
+    window.addEventListener('load',function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); });
+  }
 })();
 </script>
 </body>
